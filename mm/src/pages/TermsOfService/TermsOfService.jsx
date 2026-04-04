@@ -4,7 +4,7 @@ import { FaArrowLeft, FaCalendarAlt, FaFileAlt } from "react-icons/fa";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import "./TermsOfService.css";
-import second from "./../../assets/Image/logog.png";
+import second from "./../../assets/Image/logogg.png";
 
 // Custom hook for scroll animations
 const useScrollAnimation = () => {
