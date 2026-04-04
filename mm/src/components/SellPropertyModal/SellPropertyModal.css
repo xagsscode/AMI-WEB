@@ -1,0 +1,379 @@
+/* ===== SELL PROPERTY MODAL ===== */
+.sell-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+}
+
+.sell-modal {
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    width: 100%;
+    max-width: 640px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+    animation: sellModalIn 0.25s ease;
+}
+
+@keyframes sellModalIn {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.sell-modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 32px 20px;
+    border-bottom: 1px solid var(--gray-100);
+    position: sticky;
+    top: 0;
+    background: var(--white);
+    z-index: 1;
+}
+
+.sell-modal__title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--gray-900);
+}
+
+.sell-modal__subtitle {
+    font-size: 13px;
+    color: var(--gray-400);
+    margin-top: 2px;
+}
+
+.sell-modal__close {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: var(--gray-100);
+    color: var(--gray-600);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    flex-shrink: 0;
+}
+
+.sell-modal__close:hover {
+    background: var(--gray-200);
+    color: var(--gray-900);
+}
+
+.sell-modal__body {
+    padding: 28px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ===== FORM GROUPS ===== */
+.sell-form__group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.sell-form__label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-700);
+}
+
+.sell-form__label span {
+    color: #e53e3e;
+    margin-left: 2px;
+}
+
+.sell-form__input,
+.sell-form__select,
+.sell-form__textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    color: var(--gray-800);
+    background: var(--white);
+    transition: border-color 0.2s;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.sell-form__input:focus,
+.sell-form__select:focus,
+.sell-form__textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.12);
+}
+
+.sell-form__textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+.sell-form__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+/* ===== PROPERTY TYPE PILLS ===== */
+.sell-form__type-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.sell-form__type-pill {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 8px;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    background: var(--white);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gray-600);
+}
+
+.sell-form__type-pill svg {
+    font-size: 20px;
+    color: var(--gray-400);
+    transition: var(--transition);
+}
+
+.sell-form__type-pill:hover,
+.sell-form__type-pill.active {
+    border-color: var(--gold);
+    background: var(--gold-bg);
+    color: var(--gold);
+}
+
+.sell-form__type-pill.active svg,
+.sell-form__type-pill:hover svg {
+    color: var(--gold);
+}
+
+/* ===== PRICE TYPE TOGGLE ===== */
+.sell-form__price-type {
+    display: flex;
+    gap: 10px;
+}
+
+.sell-form__price-btn {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    background: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-500);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.sell-form__price-btn.active {
+    border-color: var(--gold);
+    background: var(--gold-bg);
+    color: var(--gold);
+}
+
+/* ===== IMAGE UPLOAD ===== */
+.sell-form__upload {
+    border: 2px dashed var(--gray-200);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+}
+
+.sell-form__upload:hover {
+    border-color: var(--gold);
+    background: var(--gold-bg);
+}
+
+.sell-form__upload input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.sell-form__upload-icon {
+    font-size: 28px;
+    color: var(--gold);
+    margin-bottom: 8px;
+}
+
+.sell-form__upload p {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-700);
+    margin: 0 0 4px;
+}
+
+.sell-form__upload span {
+    font-size: 12px;
+    color: var(--gray-400);
+}
+
+.sell-form__preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.sell-form__preview-img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--gray-200);
+}
+
+/* ===== SUBMIT ===== */
+.sell-modal__footer {
+    padding: 0 32px 32px;
+    display: flex;
+    gap: 12px;
+}
+
+.sell-modal__submit {
+    flex: 1;
+    padding: 14px;
+    background: var(--gold);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.sell-modal__submit:hover:not(:disabled) {
+    background: var(--gold-dark, #b8860b);
+    transform: translateY(-1px);
+}
+
+.sell-modal__submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.sell-modal__cancel {
+    padding: 14px 24px;
+    background: var(--gray-100);
+    color: var(--gray-600);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.sell-modal__cancel:hover {
+    background: var(--gray-200);
+}
+
+/* ===== SUCCESS STATE ===== */
+.sell-modal__success {
+    padding: 60px 32px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.sell-modal__success-icon {
+    width: 72px;
+    height: 72px;
+    background: var(--gold-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: var(--gold);
+}
+
+.sell-modal__success h3 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--gray-900);
+}
+
+.sell-modal__success p {
+    font-size: 14px;
+    color: var(--gray-500);
+    max-width: 340px;
+    line-height: 1.6;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+    .sell-modal {
+        max-height: 95vh;
+    }
+
+    .sell-modal__header,
+    .sell-modal__body,
+    .sell-modal__footer {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .sell-form__row {
+        grid-template-columns: 1fr;
+    }
+
+    .sell-form__type-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

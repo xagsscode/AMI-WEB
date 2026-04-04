@@ -1,0 +1,390 @@
+/* ===== AGENTS PAGE ===== */
+.ami-agents-header {
+    background: linear-gradient(135deg, #1A1208 0%, #2C1F0A 100%);
+    padding: 120px 0 56px;
+    position: relative;
+    overflow: hidden;
+}
+
+.ami-agents-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(201, 169, 110, 0.08) 0%, transparent 70%);
+}
+
+.ami-agents-header .ami-container {
+    position: relative;
+}
+
+.ami-agents-header__badge {
+    background: rgba(201, 169, 110, 0.15);
+    border-color: rgba(201, 169, 110, 0.4);
+    color: #E8D5B0;
+    margin-bottom: 16px;
+}
+
+.ami-agents-header__title {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 800;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.ami-agents-header__sub {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 32px;
+    max-width: 500px;
+}
+
+.ami-agents-header__controls {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Search */
+.ami-agents-search {
+    position: relative;
+    max-width: 480px;
+}
+
+.ami-agents-search__icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #A3A3A3;
+    font-size: 14px;
+}
+
+.ami-agents-search input {
+    width: 100%;
+    padding: 13px 16px 13px 44px;
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.ami-agents-search input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.ami-agents-search input:focus {
+    border-color: #C9A96E;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* Filter pills */
+.ami-agents-filter {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.ami-agents-filter .ami-filter-pill {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.ami-agents-filter .ami-filter-pill:hover {
+    border-color: #C9A96E;
+    color: #E8D5B0;
+    background: rgba(201, 169, 110, 0.1);
+}
+
+.ami-agents-filter .ami-filter-pill.active {
+    background: #C9A96E;
+    border-color: #C9A96E;
+    color: white;
+}
+
+/* Body */
+.ami-agents-body {
+    padding: 40px 24px 80px;
+}
+
+.ami-agents-count {
+    font-size: 14px;
+    color: #737373;
+    margin-bottom: 28px;
+}
+
+/* Grid */
+.ami-agents-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+/* Agent card */
+.ami-agent-card {
+    background: white;
+    border: 1px solid #F0F0F0;
+    border-radius: 20px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.ami-agent-card:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+}
+
+.ami-agent-card__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.ami-agent-card__avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 800;
+    color: white;
+    flex-shrink: 0;
+}
+
+.ami-agent-card__verified {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #10B981;
+    background: #ECFDF5;
+    padding: 4px 10px;
+    border-radius: 100px;
+}
+
+.ami-agent-card__name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #171717;
+    margin: 0;
+}
+
+.ami-agent-card__title {
+    font-size: 13px;
+    color: #737373;
+    margin: 4px 0 0;
+}
+
+.ami-agent-card__location {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    color: #A3A3A3;
+    margin-top: 6px;
+}
+
+.ami-agent-card__location svg {
+    color: #C9A96E;
+    font-size: 11px;
+}
+
+/* Rating */
+.ami-agent-card__rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ami-agent-card__rating-val {
+    font-size: 14px;
+    font-weight: 700;
+    color: #171717;
+}
+
+.ami-agent-card__reviews {
+    font-size: 12px;
+    color: #A3A3A3;
+}
+
+/* Stats */
+.ami-agent-card__stats {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: #F8F8F8;
+    border-radius: 12px;
+    padding: 14px;
+}
+
+.ami-agent-card__stat {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.ami-agent-card__stat span {
+    font-size: 20px;
+    font-weight: 800;
+    color: #C9A96E;
+}
+
+.ami-agent-card__stat small {
+    font-size: 11px;
+    color: #A3A3A3;
+    font-weight: 500;
+}
+
+.ami-agent-card__stat-divider {
+    width: 1px;
+    height: 32px;
+    background: #E5E5E5;
+}
+
+/* Specialties */
+.ami-agent-card__specialties {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.ami-agent-card__specialty {
+    padding: 4px 10px;
+    background: #FBF7F0;
+    border: 1px solid #E8D5B0;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #A8843A;
+}
+
+/* Actions */
+.ami-agent-card__actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.ami-agent-card__action {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 11px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    font-family: inherit;
+}
+
+.ami-agent-card__action--outline {
+    border: 1.5px solid #E5E5E5;
+    color: #525252;
+    background: white;
+}
+
+.ami-agent-card__action--outline:hover {
+    border-color: #C9A96E;
+    color: #A8843A;
+    background: #FBF7F0;
+}
+
+.ami-agent-card__action--primary {
+    background: #C9A96E;
+    color: white;
+    border: 1.5px solid #C9A96E;
+}
+
+.ami-agent-card__action--primary:hover {
+    background: #A8843A;
+    border-color: #A8843A;
+}
+
+/* Empty state */
+.ami-agents-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px;
+    gap: 12px;
+    text-align: center;
+}
+
+.ami-agents-empty span {
+    font-size: 56px;
+}
+
+.ami-agents-empty p {
+    font-size: 18px;
+    font-weight: 600;
+    color: #525252;
+}
+
+/* CTA */
+.ami-agents-cta {
+    background: #F8F8F8;
+    border-top: 1px solid #F0F0F0;
+    padding: 56px 0;
+}
+
+.ami-agents-cta__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+.ami-agents-cta__title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #171717;
+    margin-bottom: 6px;
+}
+
+.ami-agents-cta__sub {
+    font-size: 15px;
+    color: #737373;
+    max-width: 480px;
+}
+
+.ami-agents-cta__btn {
+    flex-shrink: 0;
+    padding: 14px 32px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .ami-agents-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .ami-agents-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ami-agents-cta__inner {
+        flex-direction: column;
+        text-align: center;
+    }
+}

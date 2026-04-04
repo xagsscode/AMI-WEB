@@ -1,0 +1,470 @@
+/* ===== AMI AUTH SHARED STYLES ===== */
+.ami-auth-page {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Inter', 'Poppins', sans-serif;
+}
+
+/* Left panel */
+.ami-auth-left {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(135deg, #0F0F0F 0%, #1A1208 40%, #2C1F0A 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px;
+  overflow: hidden;
+}
+
+.ami-auth-left::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=70") center/cover no-repeat;
+  opacity: 0.2;
+}
+
+.ami-auth-left__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(10, 8, 4, 0.85) 0%, rgba(26, 18, 8, 0.75) 100%);
+}
+
+.ami-auth-left__content {
+  position: relative;
+  z-index: 1;
+  max-width: 420px;
+  color: white;
+}
+
+.ami-auth-left__logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.ami-auth-left__logo-icon {
+  width: 44px;
+  height: 44px;
+  background: #C9A96E;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: white;
+  flex-shrink: 0;
+}
+
+.ami-auth-left__logo-name {
+  font-size: 18px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+.ami-auth-left__logo-sub {
+  font-size: 11px;
+  color: #C9A96E;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ami-auth-left__headline {
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  color: white;
+}
+
+.ami-auth-left__sub {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.ami-auth-left__stats {
+  display: flex;
+  gap: 32px;
+}
+
+.ami-auth-left__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ami-auth-left__stat span {
+  font-size: 22px;
+  font-weight: 800;
+  color: #C9A96E;
+}
+
+.ami-auth-left__stat small {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Right panel */
+.ami-auth-right {
+  flex: 1;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 40px;
+  overflow-y: auto;
+}
+
+.ami-auth-form-wrap {
+  width: 100%;
+  max-width: 420px;
+}
+
+.ami-auth-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: #737373;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 32px;
+  transition: color 0.2s;
+  font-family: inherit;
+}
+
+.ami-auth-back:hover {
+  color: #C9A96E;
+}
+
+.ami-auth-form-header {
+  margin-bottom: 28px;
+}
+
+.ami-auth-form-header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #171717;
+  margin: 0 0 6px;
+}
+
+.ami-auth-form-header p {
+  font-size: 15px;
+  color: #737373;
+  margin: 0;
+}
+
+/* Error banner */
+.ami-auth-error {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  color: #DC2626;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Fields */
+.ami-auth-field {
+  margin-bottom: 20px;
+}
+
+.ami-auth-field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #404040;
+  margin-bottom: 7px;
+}
+
+.ami-auth-field input {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid #E5E5E5;
+  border-radius: 10px;
+  font-size: 15px;
+  color: #171717;
+  background: #FAFAFA;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.ami-auth-field input:focus {
+  border-color: #C9A96E;
+  background: #FFFDF8;
+}
+
+.ami-auth-field input.error {
+  border-color: #EF4444;
+}
+
+.ami-auth-field input::placeholder {
+  color: #A3A3A3;
+}
+
+.ami-auth-field__password {
+  position: relative;
+}
+
+.ami-auth-field__password input {
+  padding-right: 48px;
+}
+
+.ami-auth-field__eye {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #A3A3A3;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  transition: color 0.2s;
+}
+
+.ami-auth-field__eye:hover {
+  color: #C9A96E;
+}
+
+.ami-auth-field-error {
+  display: block;
+  font-size: 12px;
+  color: #EF4444;
+  margin-top: 5px;
+}
+
+/* Row (remember + forgot) */
+.ami-auth-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.ami-auth-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #525252;
+}
+
+.ami-auth-checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #C9A96E;
+  cursor: pointer;
+}
+
+.ami-auth-link-btn {
+  background: none;
+  border: none;
+  color: #C9A96E;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  transition: color 0.2s;
+}
+
+.ami-auth-link-btn:hover {
+  color: #A8843A;
+}
+
+/* Submit button */
+.ami-auth-submit {
+  width: 100%;
+  padding: 14px;
+  background: #C9A96E;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+}
+
+.ami-auth-submit:hover:not(:disabled) {
+  background: #A8843A;
+  box-shadow: 0 4px 20px rgba(201, 169, 110, 0.35);
+  transform: translateY(-1px);
+}
+
+.ami-auth-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Spinner */
+.ami-auth-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid rgba(255, 255, 255, 0.4);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: ami-spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+.ami-auth-spinner--dark {
+  border-color: rgba(0, 0, 0, 0.15);
+  border-top-color: #525252;
+}
+
+@keyframes ami-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Divider */
+.ami-auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.ami-auth-divider::before,
+.ami-auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #E5E5E5;
+}
+
+.ami-auth-divider span {
+  font-size: 13px;
+  color: #A3A3A3;
+  white-space: nowrap;
+}
+
+/* Google button */
+.ami-auth-google {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 13px;
+  border: 1.5px solid #E5E5E5;
+  border-radius: 10px;
+  background: white;
+  color: #404040;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  font-family: inherit;
+  min-height: 50px;
+}
+
+.ami-auth-google:hover:not(:disabled) {
+  border-color: #D4D4D4;
+  background: #F8F8F8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.ami-auth-google:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Switch link */
+.ami-auth-switch {
+  text-align: center;
+  font-size: 14px;
+  color: #737373;
+  margin-top: 24px;
+  margin-bottom: 0;
+}
+
+.ami-auth-switch-link {
+  color: #C9A96E;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.ami-auth-switch-link:hover {
+  color: #A8843A;
+}
+
+/* Terms */
+.ami-auth-terms {
+  text-align: center;
+  font-size: 12px;
+  color: #A3A3A3;
+  margin-top: 16px;
+  line-height: 1.6;
+}
+
+.ami-auth-terms a {
+  color: #C9A96E;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.ami-auth-terms a:hover {
+  color: #A8843A;
+}
+
+/* Step indicator */
+.ami-auth-step {
+  font-size: 12px;
+  font-weight: 600;
+  color: #C9A96E;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .ami-auth-left {
+    display: none;
+  }
+
+  .ami-auth-right {
+    flex: 1;
+    padding: 32px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ami-auth-right {
+    padding: 24px 20px;
+    align-items: flex-start;
+  }
+
+  .ami-auth-form-wrap {
+    padding-top: 16px;
+  }
+}
