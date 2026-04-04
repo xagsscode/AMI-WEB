@@ -4,7 +4,7 @@ import { FaArrowLeft, FaCalendarAlt, FaShieldAlt } from "react-icons/fa";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import "./PrivacyPolicy.css";
-import second from "./../../assets/Image/logogg.png";
+;
 
 // Custom hook for scroll animations
 const useScrollAnimation = () => {
@@ -158,7 +158,7 @@ const PrivacyPolicy = () => {
         <div className="privacy_nav-container">
           <div className="privacy_nav-content">
             <div className="privacy_nav-logo">
-              <img src={second} alt="logo" className="privacy_logo-image" />
+              <img src="/logo.png" alt="logo" className="privacy_logo-image" />
               <span className="privacy_logo-textt">FashionTally</span>
             </div>
             <div className="privacy_nav-links-desktop">

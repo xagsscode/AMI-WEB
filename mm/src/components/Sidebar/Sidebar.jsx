@@ -9,7 +9,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { RiApps2AiLine } from "react-icons/ri";
 
 import "./Sidebar.css";
-import logo from "../../assets/Image/logo.png";
+// logo import removed;
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -202,7 +202,7 @@ const Sidebar = () => {
         onTouchEnd={handleTouchEnd}
       >
         <div className="sidebar-header">
-          <img src={logo} alt="AMI Smart Homes" className="sidebar-logo" />
+          <img src="/logo.png" alt="AMI Smart Homes" className="sidebar-logo" />
           <h2 className="sidebar-title">AMI Homes</h2>
         </div>
 

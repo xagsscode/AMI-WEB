@@ -10,13 +10,9 @@ import { HiMenuAlt3 } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import { FiPhone } from "react-icons/fi";
 import "./Home.css";
-import second from "./../../assets/Image/logogg.png";
+;
 
 // Import testimonial images
-import ummaImage from "../../assets/Image/umma_baffa.jpeg";
-import fatiimahImage from "../../assets/Image/fatiimah-clothing.jpeg";
-import muniraImage from "../../assets/Image/munira-nuhu.jpg";
-import khadijahImage from "../../assets/Image/Khadijah-Labaran.png";
 
 // Custom hook for scroll animations
 const useScrollAnimation = () => {
@@ -228,7 +224,7 @@ const Home = () => {
         <div className="nav-container">
           <div className="nav-content">
             <div className="nav-logo">
-              <img src={second} alt="logo" className="logo-image" />
+              <img src="/logo.png" alt="logo" className="logo-image" />
               <span className="logo-textt">FashionTally</span>
             </div>
             <div className="nav-links-desktop">
@@ -704,7 +700,7 @@ const Home = () => {
           <div className="footer-grid">
             <div className="footer-brand">
               <div className="footer-logo">
-                <img src={second} alt="logo" className="logo-image" />
+                <img src="/logo.png" alt="logo" className="logo-image" />
                 <span className="logo-textt">FashionTally</span>
               </div>
               <p className="footer-description">

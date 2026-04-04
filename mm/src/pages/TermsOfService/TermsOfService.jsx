@@ -4,7 +4,7 @@ import { FaArrowLeft, FaCalendarAlt, FaFileAlt } from "react-icons/fa";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import "./TermsOfService.css";
-import second from "./../../assets/Image/logogg.png";
+;
 
 // Custom hook for scroll animations
 const useScrollAnimation = () => {
@@ -194,7 +194,7 @@ const TermsOfService = () => {
         <div className="terms_nav-container">
           <div className="terms_nav-content">
             <div className="terms_nav-logo">
-              <img src={second} alt="logo" className="terms_logo-image" />
+              <img src="/logo.png" alt="logo" className="terms_logo-image" />
               <span className="terms_logo-textt">FashionTally</span>
             </div>
             <div className="terms_nav-links-desktop">

@@ -6,7 +6,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import "./About.css";
-import second from "./../../assets/Image/logogg.png";
+;
 
 // Custom hook for scroll animations
 const useScrollAnimation = () => {
@@ -70,7 +70,7 @@ const About = () => {
         <div className="about_nav-container">
           <div className="about_nav-content">
             <div className="about_nav-logo">
-              <img src={second} alt="logo" className="about_logo-image" />
+              <img src="/logo.png" alt="logo" className="about_logo-image" />
               <span className="about_logo-textt">FashionTally</span>
             </div>
             <div className="about_nav-links-desktop">
@@ -357,7 +357,7 @@ const About = () => {
           <div className="about_footer-grid">
             <div className="about_footer-brand">
               <div className="about_footer-logo">
-                <img src={second} alt="logo" className="about_logo-image" />
+                <img src="/logo.png" alt="logo" className="about_logo-image" />
                 <span className="about_logo-textt">FashionTally</span>
               </div>
               <p className="about_footer-description">

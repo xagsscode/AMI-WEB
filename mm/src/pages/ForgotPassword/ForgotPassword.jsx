@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useNewAuth } from "../../contexts/NewAuthContext";
 import Input from "../../components/Input";
 import Button from "../../components/button/Button";
-import logo from "../../assets/Image/logo.png";
+// logo import removed;
 import "./ForgotPassword.css";
 
 const ForgotPassword = () => {
@@ -59,7 +59,7 @@ const ForgotPassword = () => {
         <div className="forgot-password-left-section">
           <div className="forgot-password-left-content">
             <img
-              src={logo}
+              src="/logo.png"
               alt="AMI Smart Homes Logo"
               className="forgot-password-logo"
             />
@@ -122,7 +122,7 @@ const ForgotPassword = () => {
       <div className="forgot-password-left-section">
         <div className="forgot-password-left-content">
           <img
-            src={logo}
+            src="/logo.png"
             alt="AMI Smart Homes Logo"
             className="forgot-password-logo"
           />

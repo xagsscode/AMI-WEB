@@ -4,7 +4,7 @@ import { FaArrowLeft, FaCalendarAlt, FaCookie } from "react-icons/fa";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import "./CookiePolicy.css";
-import second from "./../../assets/Image/logogg.png";
+;
 
 // Custom hook for scroll animations
 const useScrollAnimation = () => {
@@ -163,7 +163,7 @@ const CookiePolicy = () => {
         <div className="cookie_nav-container">
           <div className="cookie_nav-content">
             <div className="cookie_nav-logo">
-              <img src={second} alt="logo" className="cookie_logo-image" />
+              <img src="/logo.png" alt="logo" className="cookie_logo-image" />
               <span className="cookie_logo-textt">FashionTally</span>
             </div>
             <div className="cookie_nav-links-desktop">
