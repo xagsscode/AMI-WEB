@@ -14,9 +14,9 @@ const CONTACT_METHODS = [
   {
     icon: <FaEnvelope />,
     title: "Email Us",
-    detail: "hello@amismarthomes.ng",
+    detail: "info@amismarthomes.com",
     note: "We reply within 24 hours",
-    href: "mailto:hello@amismarthomes.ng",
+    href: "mailto:info@amismarthomes.com",
     color: "#C9A96E",
   },
   {
@@ -64,7 +64,7 @@ const FAQS = [
   },
   {
     q: "How do I report a suspicious listing?",
-    a: "Click the 'Report' button on any listing page, or email us at report@amismarthomes.ng. We take fraud seriously and investigate all reports promptly.",
+    a: "Click the 'Report' button on any listing page, or email us at info@amismarthomes.com. We take fraud seriously and investigate all reports promptly.",
   },
   {
     q: "Can I save properties and compare them?",
@@ -206,7 +206,7 @@ const Contact = () => {
                     <div className="ami-contact-info__item-icon"><FaEnvelope /></div>
                     <div>
                       <strong>Email</strong>
-                      <p>hello@amismarthomes.ng</p>
+                      <p>info@amismarthomes.com</p>
                     </div>
                   </div>
                 </div>

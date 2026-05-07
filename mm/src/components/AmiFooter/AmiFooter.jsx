@@ -68,7 +68,7 @@ const AmiFooter = () => {
                             </li>
                             <li>
                                 <FaEnvelope className="ami-footer__contact-icon" />
-                                <a href="mailto:hello@amismarthomes.ng">hello@amismarthomes.ng</a>
+                                <a href="mailto:info@amismarthomes.com">info@amismarthomes.com</a>
                             </li>
                         </ul>
                     </div>

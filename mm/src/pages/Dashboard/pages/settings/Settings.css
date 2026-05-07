@@ -76,7 +76,7 @@
 .sett_business_info_card {
   background-color: var(--bg-secondary);
   /* PRESERVE BACKGROUND IMAGE - DO NOT CHANGE */
-  background-image: url("./../../../../assets/Image/bg.png");
+  background-image: url("/bg.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

@@ -168,7 +168,7 @@
 /* Active state - PRESERVE ORIGINAL STYLING */
 .sidebar-link-active {
   /* PRESERVE BACKGROUND IMAGE - DO NOT CHANGE */
-  background-image: url("./../../assets/Image/bg.png");
+  background-image: url("/bg.png");
   background-repeat: repeat;
   background-size: contain;
   background-position: center;

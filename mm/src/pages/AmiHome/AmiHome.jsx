@@ -4,8 +4,10 @@ import {
     FaUserTie, FaLock, FaSearch,
     FaHome, FaBuilding, FaTree, FaStore,
     FaArrowRight, FaStar, FaCheckCircle, FaMapMarkerAlt,
+    FaCity, FaHandshake, FaShieldAlt, FaLeaf,
 } from "react-icons/fa";
-import { MdVerified } from "react-icons/md";
+import { MdVerified, MdApartment, MdVilla, MdLocationCity } from "react-icons/md";
+import { BsBuildings, BsHouseDoor } from "react-icons/bs";
 import AmiNavbar from "../../components/AmiNavbar";
 import AmiFooter from "../../components/AmiFooter";
 import SearchBar from "../../components/SearchBar";
@@ -29,32 +31,95 @@ const useScrollReveal = () => {
 
 /* ── Static data ── */
 const CATEGORIES = [
-    { icon: <FaHome />, label: "Houses", type: "house", count: "120+ listings" },
-    { icon: <FaBuilding />, label: "Apartments", type: "apartment", count: "85+ listings" },
-    { icon: <FaTree />, label: "Land", type: "land", count: "60+ listings" },
-    { icon: <FaStore />, label: "Commercial", type: "commercial", count: "40+ listings" },
+    { icon: <FaHome />, label: "Houses", type: "house", count: "Premium Duplexes" },
+    { icon: <MdApartment />, label: "Apartments", type: "apartment", count: "Modern Flats" },
+    { icon: <FaTree />, label: "Land", type: "land", count: "Serviced Plots" },
+    { icon: <FaStore />, label: "Commercial", type: "commercial", count: "Investment Units" },
+];
+
+const SERVICES = [
+    {
+        icon: <BsBuildings />,
+        title: "Property Development",
+        desc: "We design and deliver premium residential estates with modern infrastructure, smart amenities, and quality finishes built to last.",
+    },
+    {
+        icon: <FaLeaf />,
+        title: "Site & Service Solutions",
+        desc: "Fully serviced plots with roads, drainage, electricity, and water — ready for you to build your dream home on your terms.",
+    },
+    {
+        icon: <FaHome />,
+        title: "Smart Homes",
+        desc: "Fibre-connected, tech-enabled homes designed for modern living — from smart security to energy-efficient infrastructure.",
+    },
+    {
+        icon: <MdVilla />,
+        title: "Luxury Housing",
+        desc: "Exclusive gated communities and high-end residences crafted for comfort, elegance, and a premium lifestyle.",
+    },
+    {
+        icon: <FaHandshake />,
+        title: "Property Investment",
+        desc: "Transparent, rewarding investment opportunities in high-growth locations across Abuja and Kano with strong ROI potential.",
+    },
+    {
+        icon: <FaCity />,
+        title: "Land Acquisition",
+        desc: "We source, verify, and secure prime land in strategic locations — making land ownership simple, safe, and stress-free.",
+    },
+];
+
+const PROJECTS = [
+    {
+        id: "victory-park",
+        name: "Victory Park Resort",
+        location: "Gwarinpa Extension, Abuja",
+        desc: "A premium residential estate designed for comfort, security, and modern living — featuring recreational areas, schools, shopping facilities, and landscaped surroundings.",
+        types: ["Sansiro Emirate Maisonette — 500 SQM", "Etihad Fully Detached Duplex — 400 SQM", "Ferragamo Terrace Duplex — 250 SQM"],
+        tag: "Abuja",
+        image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80",
+    },
+    {
+        id: "ami-residence-kubwa",
+        name: "AMI Residence",
+        location: "Kubwa, Abuja",
+        desc: "A thoughtfully planned gated community featuring contemporary homes, landscaped greenery, private driveways, and palm-lined roads for serene modern living.",
+        types: ["Semi Detached Duplex — 250 SQM", "Fully Detached Duplex — 500 SQM"],
+        tag: "Abuja",
+        image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80",
+    },
+    {
+        id: "ami-residence-kano",
+        name: "AMI Residence",
+        location: "Bompai, Kano",
+        desc: "A boutique residential development on President Avenue, Bompai — designed for modern comfort with spacious apartments, quality finishes, and natural ventilation.",
+        types: ["3 Bedroom Apartment Flats"],
+        tag: "Kano",
+        image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80",
+    },
 ];
 
 const WHY_ITEMS = [
     {
         icon: <MdVerified />,
-        title: "Verified Listings",
-        desc: "Every property is verified by our team before going live. No fake listings, ever.",
+        title: "Transparency You Can Trust",
+        desc: "Every development is backed by clear documentation, verified titles, and full legal support — no hidden surprises.",
     },
     {
-        icon: <FaUserTie />,
-        title: "Trusted Agents",
-        desc: "Work with certified, background-checked agents who know the Nigerian market.",
+        icon: <FaShieldAlt />,
+        title: "Quality Without Compromise",
+        desc: "From foundation to finishing, we use premium materials and modern construction standards on every project.",
     },
     {
-        icon: <FaLock />,
-        title: "Secure Transactions",
-        desc: "Escrow-backed payments and legal documentation support for every deal.",
+        icon: <FaHandshake />,
+        title: "Hassle-Free Ownership",
+        desc: "We handle the complexity so you don't have to — from land acquisition to title documentation and handover.",
     },
     {
-        icon: <FaSearch />,
-        title: "Easy Property Search",
-        desc: "Powerful filters to find exactly what you need — by location, price, or type.",
+        icon: <FaCity />,
+        title: "Smart Community Living",
+        desc: "Our estates are designed as complete communities — with infrastructure, amenities, and connectivity built in.",
     },
 ];
 
@@ -62,31 +127,31 @@ const TESTIMONIALS = [
     {
         name: "Amina Bello",
         role: "Homeowner, Abuja",
-        comment: "AMI Smart Homes made finding my dream apartment in Abuja so seamless. The listings were accurate and the agent was professional.",
+        comment: "AMI Smart Homes delivered exactly what they promised. The quality of finishing at Victory Park is exceptional — I couldn't be happier with my investment.",
         rating: 5,
         initials: "AB",
     },
     {
         name: "Chukwuemeka Obi",
         role: "Property Investor, Lagos",
-        comment: "I've used several platforms but AMI stands out. The verified listings saved me from scams and I closed two deals in a month.",
+        comment: "I've invested in several developments across Nigeria, but AMI stands out for their transparency and professionalism. The ROI has been outstanding.",
         rating: 5,
         initials: "CO",
     },
     {
         name: "Fatima Yusuf",
-        role: "Tenant, Port Harcourt",
-        comment: "Renting through AMI was stress-free. The search filters are excellent and the team was responsive throughout the process.",
+        role: "Resident, Kano",
+        comment: "The AMI Residence in Bompai exceeded my expectations. Modern design, great location, and a team that genuinely cares about client satisfaction.",
         rating: 5,
         initials: "FY",
     },
 ];
 
 const STATS = [
-    { value: "5,000+", label: "Properties Listed" },
-    { value: "3,200+", label: "Happy Clients" },
-    { value: "120+", label: "Verified Agents" },
-    { value: "18", label: "States Covered" },
+    { value: "3+", label: "Active Estates" },
+    { value: "500+", label: "Happy Families" },
+    { value: "2", label: "Cities Covered" },
+    { value: "100%", label: "Verified Titles" },
 ];
 
 /* ── Component ── */
@@ -114,24 +179,143 @@ const AmiHome = () => {
                 <div className="ami-hero__overlay" />
                 <div className="ami-container ami-hero__content">
                     <div className="ami-badge ami-hero__badge">
-                        <FaCheckCircle /> Nigeria&apos;s #1 Verified Property Platform
+                        <FaCheckCircle /> Premium Real Estate Development · Abuja &amp; Kano
                     </div>
                     <h1 className="ami-hero__title">
-                        Find Your Dream<br />
-                        <span className="ami-gold-text">Property in Nigeria</span>
+                        Creating Homes,<br />
+                        <span className="ami-gold-text">Building Wealth</span>
                     </h1>
                     <p className="ami-hero__subtitle">
-                        Buy, rent, or invest in verified properties with AMI Homes.
-                        Trusted by thousands of Nigerians.
+                        AMI Smart Homes &amp; Properties Ltd delivers premium residential estates,
+                        smart homes, and investment-grade developments across Nigeria's fastest-growing cities.
                     </p>
-                    <div className="ami-hero__search">
-                        <SearchBar onSearch={handleSearch} />
+                    <div className="ami-hero__cta-row">
+                        <button className="ami-btn-primary ami-hero__cta-btn" onClick={() => navigate("/properties")}>
+                            Explore Our Projects <FaArrowRight />
+                        </button>
+                        <button className="ami-btn-ghost ami-hero__cta-btn" onClick={() => navigate("/contact")}>
+                            Schedule a Consultation
+                        </button>
                     </div>
                     <div className="ami-hero__stats">
                         {STATS.map((s) => (
                             <div key={s.label} className="ami-hero__stat">
                                 <span className="ami-hero__stat-value">{s.value}</span>
                                 <span className="ami-hero__stat-label">{s.label}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ── ABOUT US ── */}
+            <section className="ami-section ami-about" style={{ background: "var(--off-white)" }}>
+                <div className="ami-container">
+                    <div className="ami-about__inner">
+                        <div className="ami-about__left ami-fade-up">
+                            <div className="ami-badge">About AMI Smart Homes</div>
+                            <h2 className="ami-section-title" style={{ marginTop: 12 }}>
+                                Nigeria's Premier Smart<br />Real Estate Developer
+                            </h2>
+                            <div className="ami-divider" />
+                            <p className="ami-about__text">
+                                AMI Smart Homes &amp; Properties Ltd is a forward-thinking real estate development
+                                company committed to delivering well-planned sites, premium residential estates,
+                                and smart living communities across Nigeria.
+                            </p>
+                            <p className="ami-about__text">
+                                We combine innovation, quality craftsmanship, and deep market expertise to create
+                                homes that are not just beautiful — but built to appreciate in value. From land
+                                acquisition to infrastructure development and gated community living, we make
+                                property ownership transparent, rewarding, and truly hassle-free.
+                            </p>
+                            <div className="ami-about__pillars">
+                                {["Innovation", "Quality", "Transparency", "Affordability"].map((p) => (
+                                    <span key={p} className="ami-about__pillar"><FaCheckCircle /> {p}</span>
+                                ))}
+                            </div>
+                            <button className="ami-btn-primary" style={{ marginTop: 28 }} onClick={() => navigate("/about")}>
+                                Our Story <FaArrowRight />
+                            </button>
+                        </div>
+                        <div className="ami-about__right ami-fade-up">
+                            <div className="ami-about__mission-card">
+                                <div className="ami-about__mission-icon"><FaHome /></div>
+                                <h4>Our Mission</h4>
+                                <p>To deliver well-planned sites and premium property developments that combine quality, affordability, and innovation — making property ownership hassle-free, transparent, and rewarding.</p>
+                            </div>
+                            <div className="ami-about__vision-card">
+                                <div className="ami-about__vision-icon"><FaCity /></div>
+                                <h4>Our Vision</h4>
+                                <p>To become one of Nigeria's leading smart real estate and property development companies — known for innovation, trust, and modern community living.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ── SERVICES ── */}
+            <section className="ami-section ami-services">
+                <div className="ami-container">
+                    <div className="ami-section-header ami-fade-up" style={{ textAlign: "center" }}>
+                        <div className="ami-badge" style={{ margin: "0 auto" }}>What We Do</div>
+                        <h2 className="ami-section-title" style={{ marginTop: 12 }}>Our Core Services</h2>
+                        <div className="ami-divider" style={{ margin: "16px auto" }} />
+                        <p className="ami-section-subtitle" style={{ maxWidth: 560, margin: "0 auto" }}>
+                            From land acquisition to smart home delivery — we cover every stage of the property journey.
+                        </p>
+                    </div>
+                    <div className="ami-services__grid ami-fade-up">
+                        {SERVICES.map((s) => (
+                            <div key={s.title} className="ami-service-card">
+                                <div className="ami-service-card__icon">{s.icon}</div>
+                                <h3 className="ami-service-card__title">{s.title}</h3>
+                                <p className="ami-service-card__desc">{s.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ── PROJECTS ── */}
+            <section className="ami-section ami-projects" style={{ background: "var(--off-white)" }}>
+                <div className="ami-container">
+                    <div className="ami-section-header ami-fade-up">
+                        <div className="ami-badge">Our Developments</div>
+                        <div className="ami-featured__header-row">
+                            <div>
+                                <h2 className="ami-section-title" style={{ marginTop: 12 }}>Featured Estates &amp; Projects</h2>
+                                <div className="ami-divider" />
+                            </div>
+                            <Link to="/properties" className="ami-btn-outline ami-featured__view-all">
+                                View All <FaArrowRight />
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="ami-projects__grid ami-fade-up">
+                        {PROJECTS.map((proj) => (
+                            <div key={proj.id} className="ami-project-card">
+                                <div className="ami-project-card__img-wrap">
+                                    <img src={proj.image} alt={proj.name} className="ami-project-card__img" loading="lazy" />
+                                    <span className="ami-project-card__location-tag">
+                                        <FaMapMarkerAlt /> {proj.tag}
+                                    </span>
+                                </div>
+                                <div className="ami-project-card__body">
+                                    <h3 className="ami-project-card__name">{proj.name}</h3>
+                                    <div className="ami-project-card__loc">
+                                        <FaMapMarkerAlt /> {proj.location}
+                                    </div>
+                                    <p className="ami-project-card__desc">{proj.desc}</p>
+                                    <div className="ami-project-card__types">
+                                        {proj.types.map((t) => (
+                                            <span key={t} className="ami-project-card__type">{t}</span>
+                                        ))}
+                                    </div>
+                                    <button className="ami-btn-outline ami-project-card__cta" onClick={() => navigate("/contact")}>
+                                        Enquire Now <FaArrowRight />
+                                    </button>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -167,16 +351,49 @@ const AmiHome = () => {
                 </div>
             </section>
 
-            {/* ── ABOUT US / TEAM ── */}
-            <section className="ami-section ami-team" style={{ background: "var(--off-white)" }}>
+            {/* ── WHY CHOOSE AMI ── */}
+            <section className="ami-section ami-why" style={{ background: "var(--off-white)" }}>
+                <div className="ami-container">
+                    <div className="ami-why__inner">
+                        <div className="ami-why__left ami-fade-up">
+                            <div className="ami-badge">Why Choose AMI</div>
+                            <h2 className="ami-section-title" style={{ marginTop: 12 }}>
+                                Built on Trust.<br />Driven by Excellence.
+                            </h2>
+                            <div className="ami-divider" />
+                            <p className="ami-section-subtitle">
+                                We don't just build properties — we build communities, create wealth, and
+                                deliver on every promise we make to our clients and investors.
+                            </p>
+                            <button className="ami-btn-primary" style={{ marginTop: 28 }} onClick={() => navigate("/contact")}>
+                                Talk to Us <FaArrowRight />
+                            </button>
+                        </div>
+                        <div className="ami-why__right ami-fade-up">
+                            {WHY_ITEMS.map((item) => (
+                                <div key={item.title} className="ami-why-card">
+                                    <div className="ami-why-card__icon">{item.icon}</div>
+                                    <div>
+                                        <h4 className="ami-why-card__title">{item.title}</h4>
+                                        <p className="ami-why-card__desc">{item.desc}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ── TEAM ── */}
+            <section className="ami-section ami-team">
                 <div className="ami-container">
                     <div className="ami-section-header ami-fade-up" style={{ textAlign: "center" }}>
                         <div className="ami-badge" style={{ margin: "0 auto" }}>Our People</div>
-                        <h2 className="ami-section-title" style={{ marginTop: 12 }}>Meet the Team</h2>
+                        <h2 className="ami-section-title" style={{ marginTop: 12 }}>Meet the Leadership Team</h2>
                         <div className="ami-divider" style={{ margin: "16px auto" }} />
                         <p className="ami-section-subtitle" style={{ maxWidth: 560, margin: "0 auto" }}>
-                            Behind AMI Smart Homes is a passionate team dedicated to making property
-                            ownership accessible and trustworthy for every Nigerian.
+                            A dedicated team of real estate professionals committed to delivering excellence,
+                            transparency, and value on every project.
                         </p>
                     </div>
 
@@ -186,21 +403,21 @@ const AmiHome = () => {
                             <div className="ami-team__ceo-ring" />
                             <img
                                 src={ceoImage}
-                                alt="Abdulmumin Musa Isah"
+                                alt="Abdulmumin Musa Isa"
                                 className="ami-team__ceo-avatar"
                                 onError={e => { e.target.style.display = "none"; e.target.nextSibling.style.display = "flex"; }}
                             />
                             <div className="ami-team__avatar-fallback" style={{ display: "none" }}>AM</div>
                         </div>
                         <div className="ami-team__ceo-info">
-                            <div className="ami-team__ceo-badge">Founder & CEO</div>
-                            <h3 className="ami-team__ceo-name">Abdulmumin Musa Isah</h3>
+                            <div className="ami-team__ceo-badge">CEO / Managing Director</div>
+                            <h3 className="ami-team__ceo-name">Abdulmumin Musa Isa</h3>
                             <p className="ami-team__ceo-desc">
-                                Abdulmumin is the visionary founder of AMI Smart Homes & Properties Ltd.
-                                With a deep passion for real estate and a commitment to transparency,
-                                he built AMI to bridge the gap between property seekers and verified listings
-                                across Nigeria. His leadership drives the company's mission to make
-                                homeownership a reality for every Nigerian family.
+                                Abdulmumin is the visionary founder and CEO of AMI Smart Homes &amp; Properties Ltd.
+                                With a deep passion for real estate development and an unwavering commitment to
+                                quality and transparency, he built AMI to redefine property ownership in Nigeria.
+                                His leadership drives the company's mission to deliver premium, affordable, and
+                                smart living communities across Abuja, Kano, and beyond.
                             </p>
                         </div>
                     </div>
@@ -223,76 +440,11 @@ const AmiHome = () => {
                 </div>
             </section>
 
-            {/* ── WHY CHOOSE AMI ── */}
-            <section className="ami-section ami-why">
-                <div className="ami-container">
-                    <div className="ami-why__inner">
-                        <div className="ami-why__left ami-fade-up">
-                            <div className="ami-badge">Why AMI Homes</div>
-                            <h2 className="ami-section-title" style={{ marginTop: 12 }}>
-                                The Smarter Way to Find Property
-                            </h2>
-                            <div className="ami-divider" />
-                            <p className="ami-section-subtitle">
-                                We combine technology with local expertise to give you the most reliable
-                                property experience in Nigeria.
-                            </p>
-                            <button className="ami-btn-primary" style={{ marginTop: 28 }} onClick={() => navigate("/properties")}>
-                                Browse Properties <FaArrowRight />
-                            </button>
-                        </div>
-                        <div className="ami-why__right ami-fade-up">
-                            {WHY_ITEMS.map((item) => (
-                                <div key={item.title} className="ami-why-card">
-                                    <div className="ami-why-card__icon">{item.icon}</div>
-                                    <div>
-                                        <h4 className="ami-why-card__title">{item.title}</h4>
-                                        <p className="ami-why-card__desc">{item.desc}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* ── LATEST LISTINGS ── */}
-            <section className="ami-section ami-latest" style={{ background: "var(--off-white)" }}>
-                <div className="ami-container">
-                    <div className="ami-section-header ami-fade-up">
-                        <div className="ami-badge">Just Added</div>
-                        <div className="ami-featured__header-row">
-                            <div>
-                                <h2 className="ami-section-title" style={{ marginTop: 12 }}>Latest Listings</h2>
-                                <div className="ami-divider" />
-                            </div>
-                            <Link to="/properties" className="ami-btn-outline ami-featured__view-all">
-                                See All <FaArrowRight />
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="ami-latest__layout ami-fade-up">
-                        <div className="ami-latest__cards">
-                            {DEMO_PROPERTIES.slice(0, 4).map((p) => (
-                                <PropertyCard key={p.id} property={p} />
-                            ))}
-                        </div>
-                        <div className="ami-latest__map">
-                            <div className="ami-map-placeholder">
-                                <FaMapMarkerAlt className="ami-map-placeholder__icon" />
-                                <p>Interactive map coming soon</p>
-                                <span>Properties will be pinned on the map</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             {/* ── TESTIMONIALS ── */}
-            <section className="ami-section ami-testimonials">
+            <section className="ami-section ami-testimonials" style={{ background: "var(--off-white)" }}>
                 <div className="ami-container">
                     <div className="ami-section-header ami-fade-up" style={{ textAlign: "center" }}>
-                        <div className="ami-badge" style={{ margin: "0 auto" }}>Client Reviews</div>
+                        <div className="ami-badge" style={{ margin: "0 auto" }}>Client Stories</div>
                         <h2 className="ami-section-title" style={{ marginTop: 12 }}>
                             What Our Clients Say
                         </h2>
@@ -325,18 +477,19 @@ const AmiHome = () => {
                 <div className="ami-container ami-cta__inner">
                     <div className="ami-cta__text ami-fade-up">
                         <h2 className="ami-cta__title">
-                            Looking to buy or list a property?
+                            Ready to Own a Premium Property?
                         </h2>
                         <p className="ami-cta__subtitle">
-                            Join thousands of Nigerians who trust AMI Smart Homes for their property needs.
+                            Whether you're buying your first home, investing in real estate, or looking for
+                            a serviced plot — AMI Smart Homes has the right solution for you.
                         </p>
                     </div>
                     <div className="ami-cta__actions ami-fade-up">
                         <button className="ami-btn-primary ami-cta__btn" onClick={() => navigate("/properties")}>
-                            Browse Properties <FaArrowRight />
+                            Explore Properties <FaArrowRight />
                         </button>
-                        <button className="ami-btn-ghost ami-cta__btn" onClick={() => navigate("/signup")}>
-                            List Property <FaArrowRight />
+                        <button className="ami-btn-ghost ami-cta__btn" onClick={() => navigate("/contact")}>
+                            Contact Us <FaArrowRight />
                         </button>
                     </div>
                 </div>
@@ -350,40 +503,40 @@ const AmiHome = () => {
 /* ── Team data ── */
 const TEAM_MEMBERS = [
     {
-        name: "Aisha Musa",
-        role: "Head of Sales",
-        initials: "AM",
-        desc: "Leads our sales team with over 7 years of real estate experience across Abuja and Lagos.",
+        name: "Mukhtar Dili",
+        role: "Deputy Managing Director",
+        initials: "MD",
+        desc: "Supports executive leadership and oversees day-to-day operations across all AMI developments and business units.",
     },
     {
-        name: "Emeka Okafor",
-        role: "Property Consultant",
-        initials: "EO",
-        desc: "Specialises in commercial and investment properties, helping clients maximise returns.",
+        name: "Abdullahi Sabo",
+        role: "Executive Director",
+        initials: "AS",
+        desc: "Drives strategic growth, project execution, and stakeholder relationships across AMI's portfolio of estates.",
     },
     {
-        name: "Fatima Aliyu",
-        role: "Client Relations",
-        initials: "FA",
-        desc: "Ensures every client has a smooth, stress-free experience from inquiry to closing.",
+        name: "Hauwa M Alibaba",
+        role: "Content & Communications Lead",
+        initials: "HA",
+        desc: "Shapes AMI's brand voice and manages all communications, ensuring clarity and consistency across every channel.",
     },
     {
-        name: "Ibrahim Suleiman",
-        role: "Legal & Documentation",
-        initials: "IS",
-        desc: "Handles all property documentation, title verification, and legal due diligence.",
+        name: "Umar Abida Nuhu",
+        role: "Public Relations & Media Lead",
+        initials: "UN",
+        desc: "Manages AMI's public image, media relations, and outreach to build trust and visibility in the market.",
     },
     {
-        name: "Ngozi Adeyemi",
-        role: "Marketing Manager",
-        initials: "NA",
-        desc: "Drives AMI's brand presence and connects buyers with the right listings.",
+        name: "Haleemah Adedoyin",
+        role: "Secretary",
+        initials: "HA",
+        desc: "Coordinates executive schedules, correspondence, and administrative operations with precision and professionalism.",
     },
     {
-        name: "Yusuf Garba",
-        role: "Field Agent",
-        initials: "YG",
-        desc: "On-ground property inspection and verification across the FCT and surrounding states.",
+        name: "Grace Emmanuel",
+        role: "Corporate Affairs Officer",
+        initials: "GE",
+        desc: "Handles regulatory compliance, corporate governance, and liaison with government and institutional bodies.",
     },
 ];
 
