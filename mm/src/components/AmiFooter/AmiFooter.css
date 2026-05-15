@@ -14,35 +14,15 @@
 
 /* Brand */
 .ami-footer__logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
     margin-bottom: 16px;
 }
 
-.ami-footer__logo-icon {
-    width: 40px;
-    height: 40px;
-    background: var(--gold);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 18px;
-    flex-shrink: 0;
-}
-
-.ami-footer__logo-name {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--white);
-}
-
-.ami-footer__logo-sub {
-    font-size: 11px;
-    color: var(--gold);
-    font-weight: 500;
+.ami-footer__logo-img {
+    height: 48px;
+    width: auto;
+    max-width: 150px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
 }
 
 .ami-footer__desc {

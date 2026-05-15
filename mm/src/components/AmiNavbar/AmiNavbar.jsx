@@ -4,6 +4,7 @@ import { HiMenuAlt3 } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
 import { FaHome, FaUserCircle } from "react-icons/fa";
 import { useNewAuth } from "../../contexts/NewAuthContext";
+import amiLogo from "../../assets/Image/AMI.png";
 import "./AmiNavbar.css";
 
 const GUEST_LINKS = [
@@ -50,13 +51,11 @@ const AmiNavbar = () => {
             <div className="ami-container ami-navbar__inner">
                 {/* Logo */}
                 <Link to="/" className="ami-navbar__logo">
-                    <div className="ami-navbar__logo-icon">
-                        <FaHome />
-                    </div>
-                    <div className="ami-navbar__logo-text">
-                        <span className="ami-navbar__logo-name">AMI</span>
-                        <span className="ami-navbar__logo-sub">Smart Homes</span>
-                    </div>
+                    <img
+                        src={amiLogo}
+                        alt="AMI Smart Homes & Properties Ltd"
+                        className="ami-navbar__logo-img"
+                    />
                 </Link>
 
                 {/* Desktop links */}

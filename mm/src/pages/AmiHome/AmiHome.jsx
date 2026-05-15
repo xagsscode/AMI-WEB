@@ -12,7 +12,13 @@ import AmiNavbar from "../../components/AmiNavbar";
 import AmiFooter from "../../components/AmiFooter";
 import SearchBar from "../../components/SearchBar";
 import PropertyCard from "../../components/PropertyCard";
-import ceoImage from "../../assets/Image/ceo.png";
+import ceoImage from "../../assets/Image/Abdulmumin Musa Isa.jpeg";
+import mukhtarImg from "../../assets/Image/Mukhtar Dili.jpeg";
+import abdullahiImg from "../../assets/Image/Abdullahi Sabo.jpeg";
+import hauwaImg from "../../assets/Image/Hauwa M Alibaba.jpeg";
+import umarImg from "../../assets/Image/Umar Abida Nuhu.PNG";
+import haleemahImg from "../../assets/Image/Haleemah Adedoyin.jpeg";
+import graceImg from "../../assets/Image/Grace Emmanuel.jpeg";
 import "./AmiHome.css";
 
 /* ── Scroll animation hook ── */
@@ -427,7 +433,18 @@ const AmiHome = () => {
                         {TEAM_MEMBERS.map((member) => (
                             <div key={member.name} className="ami-team__card">
                                 <div className="ami-team__avatar-wrap">
-                                    <div className="ami-team__avatar-placeholder">
+                                    {member.image ? (
+                                        <img
+                                            src={member.image}
+                                            alt={member.name}
+                                            className="ami-team__card-photo"
+                                            onError={e => {
+                                                e.target.style.display = "none";
+                                                e.target.nextSibling.style.display = "flex";
+                                            }}
+                                        />
+                                    ) : null}
+                                    <div className="ami-team__avatar-placeholder" style={member.image ? { display: "none" } : {}}>
                                         {member.initials}
                                     </div>
                                 </div>
@@ -506,36 +523,42 @@ const TEAM_MEMBERS = [
         name: "Mukhtar Dili",
         role: "Deputy Managing Director",
         initials: "MD",
+        image: mukhtarImg,
         desc: "Supports executive leadership and oversees day-to-day operations across all AMI developments and business units.",
     },
     {
         name: "Abdullahi Sabo",
         role: "Executive Director",
         initials: "AS",
+        image: abdullahiImg,
         desc: "Drives strategic growth, project execution, and stakeholder relationships across AMI's portfolio of estates.",
     },
     {
         name: "Hauwa M Alibaba",
         role: "Content & Communications Lead",
         initials: "HA",
+        image: hauwaImg,
         desc: "Shapes AMI's brand voice and manages all communications, ensuring clarity and consistency across every channel.",
     },
     {
         name: "Umar Abida Nuhu",
         role: "Public Relations & Media Lead",
         initials: "UN",
+        image: umarImg,
         desc: "Manages AMI's public image, media relations, and outreach to build trust and visibility in the market.",
     },
     {
         name: "Haleemah Adedoyin",
         role: "Secretary",
         initials: "HA",
+        image: haleemahImg,
         desc: "Coordinates executive schedules, correspondence, and administrative operations with precision and professionalism.",
     },
     {
         name: "Grace Emmanuel",
         role: "Corporate Affairs Officer",
         initials: "GE",
+        image: graceImg,
         desc: "Handles regulatory compliance, corporate governance, and liaison with government and institutional bodies.",
     },
 ];

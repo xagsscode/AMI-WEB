@@ -8,7 +8,13 @@ import {
 import { MdVerified } from "react-icons/md";
 import AmiNavbar from "../../components/AmiNavbar";
 import AmiFooter from "../../components/AmiFooter";
-import ceoImage from "../../assets/Image/ceo.png";
+import ceoImage from "../../assets/Image/Abdulmumin Musa Isa.jpeg";
+import mukhtarImg from "../../assets/Image/Mukhtar Dili.jpeg";
+import abdullahiImg from "../../assets/Image/Abdullahi Sabo.jpeg";
+import hauwaImg from "../../assets/Image/Hauwa M Alibaba.jpeg";
+import umarImg from "../../assets/Image/Umar Abida Nuhu.PNG";
+import haleemahImg from "../../assets/Image/Haleemah Adedoyin.jpeg";
+import graceImg from "../../assets/Image/Grace Emmanuel.jpeg";
 import "./About.css";
 
 const useScrollAnimation = () => {
@@ -48,12 +54,12 @@ const VALUES = [
 ];
 
 const TEAM = [
-    { name: "Mukhtar Dili", role: "Deputy Managing Director", initials: "MD" },
-    { name: "Abdullahi Sabo", role: "Executive Director", initials: "AS" },
-    { name: "Hauwa M Alibaba", role: "Content & Communications Lead", initials: "HA" },
-    { name: "Umar Abida Nuhu", role: "Public Relations & Media Lead", initials: "UN" },
-    { name: "Haleemah Adedoyin", role: "Secretary", initials: "HA" },
-    { name: "Grace Emmanuel", role: "Corporate Affairs Officer", initials: "GE" },
+    { name: "Mukhtar Dili", role: "Deputy Managing Director", initials: "MD", image: mukhtarImg },
+    { name: "Abdullahi Sabo", role: "Executive Director", initials: "AS", image: abdullahiImg },
+    { name: "Hauwa M Alibaba", role: "Content & Communications Lead", initials: "HA", image: hauwaImg },
+    { name: "Umar Abida Nuhu", role: "Public Relations & Media Lead", initials: "UN", image: umarImg },
+    { name: "Haleemah Adedoyin", role: "Secretary", initials: "HA", image: haleemahImg },
+    { name: "Grace Emmanuel", role: "Corporate Affairs Officer", initials: "GE", image: graceImg },
 ];
 
 const STATS = [
@@ -237,7 +243,20 @@ const About = () => {
                         {TEAM.map((member) => (
                             <div key={member.name + member.role} className="ami-team__card">
                                 <div className="ami-team__avatar-wrap">
-                                    <div className="ami-team__avatar-placeholder">{member.initials}</div>
+                                    {member.image ? (
+                                        <img
+                                            src={member.image}
+                                            alt={member.name}
+                                            className="ami-team__card-photo"
+                                            onError={e => {
+                                                e.target.style.display = "none";
+                                                e.target.nextSibling.style.display = "flex";
+                                            }}
+                                        />
+                                    ) : null}
+                                    <div className="ami-team__avatar-placeholder" style={member.image ? { display: "none" } : {}}>
+                                        {member.initials}
+                                    </div>
                                 </div>
                                 <div className="ami-team__card-name">{member.name}</div>
                                 <div className="ami-team__card-role">{member.role}</div>

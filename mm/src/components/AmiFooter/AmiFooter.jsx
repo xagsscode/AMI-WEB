@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { FaHome, FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { FaXTwitter, FaInstagram, FaFacebook, FaLinkedin } from "react-icons/fa6";
+import amiLogo from "../../assets/Image/AMI.png";
 import "./AmiFooter.css";
 
 const AmiFooter = () => {
@@ -13,11 +14,7 @@ const AmiFooter = () => {
                     {/* Brand */}
                     <div className="ami-footer__brand">
                         <div className="ami-footer__logo">
-                            <div className="ami-footer__logo-icon"><FaHome /></div>
-                            <div>
-                                <div className="ami-footer__logo-name">AMI Smart Homes</div>
-                                <div className="ami-footer__logo-sub">& Properties</div>
-                            </div>
+                            <img src={amiLogo} alt="AMI Smart Homes & Properties Ltd" className="ami-footer__logo-img" />
                         </div>
                         <p className="ami-footer__desc">
                             Nigeria's trusted platform for buying, renting, and investing in verified properties.

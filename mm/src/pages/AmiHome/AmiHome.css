@@ -598,6 +598,16 @@
     border: 3px solid var(--gray-100, #eee);
 }
 
+.ami-team__card-photo {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    border: 3px solid var(--gold-light);
+    display: block;
+}
+
 .ami-team__card-name {
     font-size: 17px;
     font-weight: 700;

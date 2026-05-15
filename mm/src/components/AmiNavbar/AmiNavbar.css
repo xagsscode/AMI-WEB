@@ -27,50 +27,22 @@
 .ami-navbar__logo {
     display: flex;
     align-items: center;
-    gap: 10px;
     text-decoration: none;
     flex-shrink: 0;
 }
 
-.ami-navbar__logo-icon {
-    width: 38px;
+.ami-navbar__logo-img {
+    height: 50px;
+    width: auto;
+    max-width: 250px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    transition: var(--transition);
+}
+
+.ami-navbar--scrolled .ami-navbar__logo-img {
+    filter: none;
     height: 38px;
-    background: var(--gold);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 18px;
-}
-
-.ami-navbar__logo-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.1;
-}
-
-.ami-navbar__logo-name {
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--gray-900);
-    letter-spacing: 1px;
-}
-
-.ami-navbar--scrolled .ami-navbar__logo-name {
-    color: var(--gray-900);
-}
-
-.ami-navbar:not(.ami-navbar--scrolled) .ami-navbar__logo-name {
-    color: var(--white);
-}
-
-.ami-navbar__logo-sub {
-    font-size: 10px;
-    font-weight: 500;
-    color: var(--gold);
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
 }
 
 /* Links */
