@@ -478,6 +478,35 @@
 }
 
 /* ===== TEAM / ABOUT US ===== */
+.ami-team__founders {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-bottom: 40px;
+}
+
+.ami-team__founder-card {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    background: var(--white);
+    border-radius: 24px;
+    border: 1px solid var(--gray-100);
+    padding: 36px 40px;
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+}
+
+.ami-team__founder-card:hover {
+    border-color: var(--gold-light);
+    box-shadow: var(--shadow-gold);
+}
+
+.ami-team__founder-avatar-wrap {
+    position: relative;
+    flex-shrink: 0;
+}
+
 .ami-team__ceo {
     display: flex;
     align-items: center;
@@ -631,6 +660,17 @@
 
 /* Responsive */
 @media (max-width: 900px) {
+    .ami-team__founders {
+        grid-template-columns: 1fr;
+    }
+
+    .ami-team__founder-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 32px 24px;
+        gap: 20px;
+    }
+
     .ami-team__ceo {
         flex-direction: column;
         text-align: center;
