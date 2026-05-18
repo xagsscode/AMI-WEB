@@ -406,31 +406,6 @@ const AmiHome = () => {
 
                     {/* Founders row */}
                     <div className="ami-team__founders ami-fade-up">
-                        {/* Co-Founder */}
-                        <div className="ami-team__founder-card">
-                            <div className="ami-team__founder-avatar-wrap">
-                                <div className="ami-team__ceo-ring" />
-                                <img
-                                    src={cofounderImage}
-                                    alt="Hajiya Bikisu Ibrahim Bako"
-                                    className="ami-team__ceo-avatar"
-                                    onError={e => { e.target.style.display = "none"; e.target.nextSibling.style.display = "flex"; }}
-                                />
-                                <div className="ami-team__avatar-fallback" style={{ display: "none" }}>HB</div>
-                            </div>
-                            <div className="ami-team__ceo-info">
-                                <div className="ami-team__ceo-badge">Co-Founder</div>
-                                <h3 className="ami-team__ceo-name">Hajiya Bikisu Ibrahim Bako</h3>
-                                <p className="ami-team__ceo-desc">
-                                    Hajiya Bikisu is the Co-Founder of AMI Smart Homes &amp; Properties Ltd,
-                                    bringing visionary leadership, deep community ties, and a strong commitment
-                                    to creating dignified, modern living spaces for Nigerian families.
-                                    Her dedication to quality and inclusive development is at the heart of
-                                    everything AMI builds.
-                                </p>
-                            </div>
-                        </div>
-
                         {/* CEO */}
                         <div className="ami-team__founder-card">
                             <div className="ami-team__founder-avatar-wrap">
@@ -452,6 +427,31 @@ const AmiHome = () => {
                                     quality and transparency, he built AMI to redefine property ownership in Nigeria.
                                     His leadership drives the company's mission to deliver premium, affordable, and
                                     smart living communities across Abuja, Kano, and beyond.
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Co-Founder */}
+                        <div className="ami-team__founder-card">
+                            <div className="ami-team__founder-avatar-wrap">
+                                <div className="ami-team__ceo-ring" />
+                                <img
+                                    src={cofounderImage}
+                                    alt="Hajiya Bikisu Ibrahim Bako"
+                                    className="ami-team__ceo-avatar"
+                                    onError={e => { e.target.style.display = "none"; e.target.nextSibling.style.display = "flex"; }}
+                                />
+                                <div className="ami-team__avatar-fallback" style={{ display: "none" }}>HB</div>
+                            </div>
+                            <div className="ami-team__ceo-info">
+                                <div className="ami-team__ceo-badge">Co-Founder</div>
+                                <h3 className="ami-team__ceo-name">Hajiya Bikisu Ibrahim Bako</h3>
+                                <p className="ami-team__ceo-desc">
+                                    Hajiya Bikisu is the Co-Founder of AMI Smart Homes &amp; Properties Ltd,
+                                    bringing visionary leadership, deep community ties, and a strong commitment
+                                    to creating dignified, modern living spaces for Nigerian families.
+                                    Her dedication to quality and inclusive development is at the heart of
+                                    everything AMI builds.
                                 </p>
                             </div>
                         </div>
