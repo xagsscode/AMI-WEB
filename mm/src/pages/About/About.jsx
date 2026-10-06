@@ -8,12 +8,12 @@ import {
 import { MdVerified } from "react-icons/md";
 import AmiNavbar from "../../components/AmiNavbar";
 import AmiFooter from "../../components/AmiFooter";
-import ceoImage from "../../assets/Image/Abdulmumin Musa Isa.jpeg";
+import ceoImage from "../../assets/Image/Abdulmumin Musa Isa.webp";
 import cofounderImage from "../../assets/Image/Hajiya Bikisu Ibrahim Bako.jpeg";
 import mukhtarImg from "../../assets/Image/Mukhtar Dili.jpeg";
 import abdullahiImg from "../../assets/Image/Abdullahi Sabo.jpeg";
 import hauwaImg from "../../assets/Image/Hauwa M Alibaba.jpeg";
-import umarImg from "../../assets/Image/Umar Abida Nuhu.PNG";
+import umarImg from "../../assets/Image/Umar Abida Nuhu.webp";
 import haleemahImg from "../../assets/Image/Haleemah Adedoyin.jpeg";
 import graceImg from "../../assets/Image/Grace Emmanuel.jpeg";
 import "./About.css";

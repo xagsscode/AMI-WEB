@@ -11,7 +11,10 @@ const formatPrice = (price) => {
 
 const PropertyCard = ({ property, skeleton = false }) => {
     const navigate = useNavigate();
-    const [saved, setSaved] = useState(false);
+    const [saved, setSaved] = useState(() => {
+        try { return JSON.parse(localStorage.getItem("ami_saved_properties") || "[]").includes(property?.id); }
+        catch { return false; }
+    });
     const [imgError, setImgError] = useState(false);
 
     if (skeleton) {
@@ -50,7 +53,7 @@ const PropertyCard = ({ property, skeleton = false }) => {
             onClick={() => navigate(`/properties/${id}`)}
             role="button"
             tabIndex={0}
-            onKeyDown={(e) => e.key === "Enter" && navigate(`/properties/${id}`)}
+            onKeyDown={(e) => { if (e.target === e.currentTarget && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); navigate(`/properties/${id}`); } }}
         >
             <div className="ami-property-card__img-wrap">
                 {imgSrc ? (
@@ -74,7 +77,16 @@ const PropertyCard = ({ property, skeleton = false }) => {
                 </div>
                 <button
                     className={`ami-property-card__save ${saved ? "saved" : ""}`}
-                    onClick={(e) => { e.stopPropagation(); setSaved(!saved); }}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        try {
+                            const previous = JSON.parse(localStorage.getItem("ami_saved_properties") || "[]");
+                            const next = saved ? previous.filter((value) => value !== id) : [...new Set([...previous, id])];
+                            localStorage.setItem("ami_saved_properties", JSON.stringify(next));
+                            setSaved(!saved);
+                        } catch { /* Storage may be unavailable in private browsing. */ }
+                    }}
+                    aria-pressed={saved}
                     aria-label={saved ? "Remove from saved" : "Save property"}
                 >
                     {saved ? <FaHeart /> : <FaRegHeart />}
@@ -83,6 +95,7 @@ const PropertyCard = ({ property, skeleton = false }) => {
 
             <div className="ami-property-card__body">
                 <div className="ami-property-card__type">{type}</div>
+                <h3 className="ami-property-card__title">{title}</h3>
                 <div className="ami-property-card__price">{formatPrice(price)}</div>
                 <div className="ami-property-card__location">
                     <FaMapMarkerAlt className="ami-property-card__loc-icon" />

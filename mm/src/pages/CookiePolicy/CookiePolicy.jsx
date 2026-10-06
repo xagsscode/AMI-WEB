@@ -1,3 +1,4 @@
+import amiLogo from "../../assets/Image/AMI.png";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaCalendarAlt, FaCookie } from "react-icons/fa";
@@ -30,13 +31,13 @@ const useScrollAnimation = () => {
 };
 
 const policyData = {
-  title: "Fashion Tally – Cookie Policy",
+  title: "AMI Smart Homes – Cookie Policy",
   lastUpdated: "28th January 2026",
   sections: [
     {
       title: "Introduction",
       content:
-        'This Cookie Policy explains how Fashion Tally ("we", "us", or "our") uses cookies and similar technologies when you visit or use our website and application (the "Service"). By continuing to use Fashion Tally, you consent to the use of cookies as described in this policy.',
+        'This Cookie Policy explains how AMI Smart Homes ("we", "us", or "our") uses cookies and similar technologies when you visit or use our website and application (the "Service"). By continuing to use AMI Smart Homes, you consent to the use of cookies as described in this policy.',
     },
     {
       title: "1. What Are Cookies?",
@@ -45,7 +46,7 @@ const policyData = {
     },
     {
       title: "2. How We Use Cookies",
-      content: "Fashion Tally uses cookies to:",
+      content: "AMI Smart Homes uses cookies to:",
       list: [
         "Ensure the platform functions properly",
         "Remember your login and preferences",
@@ -61,7 +62,7 @@ const policyData = {
     {
       title: "3. Types of Cookies We Use",
       content:
-        "Fashion Tally uses several types of cookies to enhance your experience:",
+        "AMI Smart Homes uses several types of cookies to enhance your experience:",
     },
     {
       title: "a. Essential Cookies",
@@ -71,7 +72,7 @@ const policyData = {
     {
       title: "b. Performance & Analytics Cookies",
       content:
-        "These cookies help us understand how users interact with Fashion Tally by collecting anonymized usage data such as:",
+        "These cookies help us understand how users interact with AMI Smart Homes by collecting anonymized usage data such as:",
       list: ["Pages visited", "Feature usage", "Error reports"],
     },
     {
@@ -96,11 +97,11 @@ const policyData = {
     {
       title: "Third-Party Disclaimer",
       content:
-        "Fashion Tally does not control these third-party cookies and is not responsible for their privacy practices.",
+        "AMI Smart Homes does not control these third-party cookies and is not responsible for their privacy practices.",
     },
     {
       title: "4. What Cookies We Do NOT Use",
-      content: "Fashion Tally does not:",
+      content: "AMI Smart Homes does not:",
       list: [
         "Sell cookie data to advertisers",
         "Use cookies for aggressive ad tracking",
@@ -115,7 +116,7 @@ const policyData = {
     {
       title: "Cookie Management Warning",
       content:
-        "Please note: Disabling certain cookies may affect the functionality and performance of Fashion Tally.",
+        "Please note: Disabling certain cookies may affect the functionality and performance of AMI Smart Homes.",
     },
     {
       title: "6. Changes to This Cookie Policy",
@@ -127,7 +128,7 @@ const policyData = {
       content:
         "If you have any questions about this Cookie Policy, please contact us:",
       list: [
-        "📧 Email: info@fashiontally.com",
+        "📧 Email: info@amismarthomes.com",
         "📞 Phone/WhatsApp: +2349023124709",
       ],
     },
@@ -163,8 +164,8 @@ const CookiePolicy = () => {
         <div className="cookie_nav-container">
           <div className="cookie_nav-content">
             <div className="cookie_nav-logo">
-              <img src="/logo.png" alt="logo" className="cookie_logo-image" />
-              <span className="cookie_logo-textt">FashionTally</span>
+              <img src={amiLogo} alt="AMI Smart Homes" className="cookie_logo-image" />
+              <span className="cookie_logo-textt">AMI Smart Homes</span>
             </div>
             <div className="cookie_nav-links-desktop">
               <a href="/" className="cookie_nav-link">

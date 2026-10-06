@@ -1,23 +1,21 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import {
-    FaUserTie, FaLock, FaSearch,
-    FaHome, FaBuilding, FaTree, FaStore,
+    FaUserTie,
+    FaHome, FaTree, FaStore,
     FaArrowRight, FaStar, FaCheckCircle, FaMapMarkerAlt,
     FaCity, FaHandshake, FaShieldAlt, FaLeaf,
 } from "react-icons/fa";
-import { MdVerified, MdApartment, MdVilla, MdLocationCity } from "react-icons/md";
-import { BsBuildings, BsHouseDoor } from "react-icons/bs";
+import { MdVerified, MdApartment, MdVilla } from "react-icons/md";
+import { BsBuildings } from "react-icons/bs";
 import AmiNavbar from "../../components/AmiNavbar";
 import AmiFooter from "../../components/AmiFooter";
-import SearchBar from "../../components/SearchBar";
-import PropertyCard from "../../components/PropertyCard";
-import ceoImage from "../../assets/Image/Abdulmumin Musa Isa.jpeg";
+import ceoImage from "../../assets/Image/Abdulmumin Musa Isa.webp";
 import cofounderImage from "../../assets/Image/Hajiya Bikisu Ibrahim Bako.jpeg";
 import mukhtarImg from "../../assets/Image/Mukhtar Dili.jpeg";
 import abdullahiImg from "../../assets/Image/Abdullahi Sabo.jpeg";
 import hauwaImg from "../../assets/Image/Hauwa M Alibaba.jpeg";
-import umarImg from "../../assets/Image/Umar Abida Nuhu.PNG";
+import umarImg from "../../assets/Image/Umar Abida Nuhu.webp";
 import haleemahImg from "../../assets/Image/Haleemah Adedoyin.jpeg";
 import graceImg from "../../assets/Image/Grace Emmanuel.jpeg";
 import "./AmiHome.css";
@@ -167,15 +165,6 @@ const AmiHome = () => {
     const [activeCategory, setActiveCategory] = useState("all");
 
     useScrollReveal();
-
-    const handleSearch = (filters) => {
-        const params = new URLSearchParams();
-        if (filters.location) params.set("location", filters.location);
-        if (filters.type !== "all") params.set("type", filters.type);
-        if (filters.priceRange !== "all") params.set("price", filters.priceRange);
-        params.set("status", filters.status);
-        navigate(`/properties?${params.toString()}`);
-    };
 
     return (
         <div className="ami-page ami-home">
@@ -592,87 +581,4 @@ const TEAM_MEMBERS = [
     },
 ];
 
-/* ── Demo data (shown when Firebase has no properties yet) ── */
-const DEMO_PROPERTIES = [
-    {
-        id: "demo-1",
-        title: "Luxury 4-Bedroom Duplex",
-        price: 85000000,
-        location: "Maitama, Abuja",
-        type: "house",
-        status: "sale",
-        images: ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80"],
-        bedrooms: 4,
-        bathrooms: 3,
-        area: 320,
-        featured: true,
-    },
-    {
-        id: "demo-2",
-        title: "Modern 3-Bedroom Apartment",
-        price: 2500000,
-        location: "Lekki Phase 1, Lagos",
-        type: "apartment",
-        status: "rent",
-        images: ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80"],
-        bedrooms: 3,
-        bathrooms: 2,
-        area: 180,
-        featured: true,
-    },
-    {
-        id: "demo-3",
-        title: "Prime Commercial Land",
-        price: 45000000,
-        location: "Wuse 2, Abuja",
-        type: "land",
-        status: "sale",
-        images: ["https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=80"],
-        bedrooms: null,
-        bathrooms: null,
-        area: 1200,
-        featured: false,
-    },
-    {
-        id: "demo-4",
-        title: "Executive 5-Bedroom Villa",
-        price: 250000000,
-        location: "Banana Island, Lagos",
-        type: "house",
-        status: "sale",
-        images: ["https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80"],
-        bedrooms: 5,
-        bathrooms: 5,
-        area: 600,
-        featured: true,
-    },
-    {
-        id: "demo-5",
-        title: "Cozy 2-Bedroom Flat",
-        price: 1200000,
-        location: "GRA, Port Harcourt",
-        type: "apartment",
-        status: "rent",
-        images: ["https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80"],
-        bedrooms: 2,
-        bathrooms: 1,
-        area: 110,
-        featured: false,
-    },
-    {
-        id: "demo-6",
-        title: "Office Complex",
-        price: 120000000,
-        location: "Victoria Island, Lagos",
-        type: "commercial",
-        status: "sale",
-        images: ["https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80"],
-        bedrooms: null,
-        bathrooms: 4,
-        area: 850,
-        featured: false,
-    },
-];
-
 export default AmiHome;
-

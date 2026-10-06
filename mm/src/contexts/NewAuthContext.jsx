@@ -8,21 +8,22 @@ import {
   sendPasswordResetEmail,
   updateProfile,
   onAuthStateChanged,
+  getIdTokenResult,
 } from "firebase/auth";
 import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 import toast, { Toaster } from "react-hot-toast";
 
 const NewAuthContext = createContext();
 
+// The context hook is intentionally colocated with its provider.
+// eslint-disable-next-line react-refresh/only-export-components
 export const useNewAuth = () => {
   const ctx = useContext(NewAuthContext);
   if (!ctx) throw new Error("useNewAuth must be used within NewAuthProvider");
   return ctx;
 };
 
-const ADMIN_EMAIL = "admin@gmail.com";
-
-const buildUserData = (firebaseUser, firestoreData = {}) => ({
+const buildUserData = (firebaseUser, firestoreData = {}, isAdmin = false) => ({
   uid: firebaseUser.uid,
   email: firebaseUser.email?.toLowerCase() || "",
   name: firestoreData.name || firebaseUser.displayName || "",
@@ -30,23 +31,16 @@ const buildUserData = (firebaseUser, firestoreData = {}) => ({
   photoURL: firebaseUser.photoURL || firestoreData.photoURL || "",
   provider: firestoreData.provider || "email",
   createdAt: firestoreData.createdAt || new Date().toISOString(),
-  isAdmin: firebaseUser.email?.toLowerCase() === ADMIN_EMAIL,
+  isAdmin,
 });
 
 export const NewAuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  // Restore session from localStorage on first load
-  useEffect(() => {
-    const stored = localStorage.getItem("ami_user");
-    if (stored) {
-      try { setUser(JSON.parse(stored)); } catch { localStorage.removeItem("ami_user"); }
-    }
-  }, []);
+  const [loading, setLoading] = useState(Boolean(auth));
 
   // Firebase auth state listener
   useEffect(() => {
+    if (!auth) return;
     const unsub = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
         const email = firebaseUser.email?.toLowerCase();
@@ -57,7 +51,10 @@ export const NewAuthProvider = ({ children }) => {
         } catch (err) {
           console.error("Firestore read error:", err);
         }
-        const userData = buildUserData(firebaseUser, firestoreData);
+        let isAdmin = false;
+        try { isAdmin = (await getIdTokenResult(firebaseUser)).claims.admin === true; }
+        catch (err) { console.error("Could not verify administrator access:", err); }
+        const userData = buildUserData(firebaseUser, firestoreData, isAdmin);
         setUser(userData);
         localStorage.setItem("ami_user", JSON.stringify(userData));
       } else {
@@ -72,6 +69,7 @@ export const NewAuthProvider = ({ children }) => {
   // ── Sign Up ──
   const signUpWithEmail = async ({ name, email, password }) => {
     try {
+      if (!auth) throw new Error("Account services are not configured. Please contact our team.");
       if (!name?.trim() || !email?.trim() || !password) {
         throw new Error("Name, email and password are required");
       }
@@ -107,10 +105,11 @@ export const NewAuthProvider = ({ children }) => {
   // ── Sign In ──
   const signInWithEmail = async (email, password) => {
     try {
+      if (!auth) throw new Error("Account services are not configured. Please contact our team.");
       const normalizedEmail = email.trim().toLowerCase();
-      await signInWithEmailAndPassword(auth, normalizedEmail, password);
+      const credential = await signInWithEmailAndPassword(auth, normalizedEmail, password);
       toast.success("Welcome back!");
-      const dest = normalizedEmail === ADMIN_EMAIL ? "/admin" : "/";
+      const dest = (await getIdTokenResult(credential.user)).claims.admin === true ? "/admin" : "/";
       setTimeout(() => { window.location.href = dest; }, 800);
       return { success: true };
     } catch (err) {
@@ -123,6 +122,7 @@ export const NewAuthProvider = ({ children }) => {
   // ── Google Sign In ──
   const signInWithGoogle = async () => {
     try {
+      if (!auth) throw new Error("Account services are not configured. Please contact our team.");
       const result = await signInWithPopup(auth, provider);
       const firebaseUser = result.user;
       const email = firebaseUser.email?.toLowerCase();
@@ -153,12 +153,13 @@ export const NewAuthProvider = ({ children }) => {
   // ── Sign Out ──
   const signOut = async () => {
     try {
+      if (!auth) throw new Error("Account services are not configured. Please contact our team.");
       await firebaseSignOut(auth);
       setUser(null);
       localStorage.removeItem("ami_user");
       toast.success("Signed out");
       window.location.href = "/";
-    } catch (err) {
+    } catch {
       toast.error("Sign out failed");
     }
   };
@@ -166,6 +167,7 @@ export const NewAuthProvider = ({ children }) => {
   // ── Reset Password ──
   const resetPassword = async (email) => {
     try {
+      if (!auth) throw new Error("Account services are not configured. Please contact our team.");
       await sendPasswordResetEmail(auth, email.trim().toLowerCase());
       toast.success("Password reset email sent!");
       return { success: true };

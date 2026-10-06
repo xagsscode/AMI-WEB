@@ -22,13 +22,13 @@ const PRICE_RANGES = [
     { value: "100000000+", label: "Above ₦100M" },
 ];
 
-const SearchBar = ({ onSearch, compact = false }) => {
+const SearchBar = ({ onSearch, compact = false, initialFilters = {} }) => {
     const navigate = useNavigate();
     const { user } = useNewAuth();
-    const [mode, setMode] = useState("buy");
-    const [location, setLocation] = useState("");
-    const [type, setType] = useState("all");
-    const [priceRange, setPriceRange] = useState("all");
+    const [mode, setMode] = useState(initialFilters.status === "rent" ? "rent" : "buy");
+    const [location, setLocation] = useState(initialFilters.location || "");
+    const [type, setType] = useState(initialFilters.type || "all");
+    const [priceRange, setPriceRange] = useState(initialFilters.priceRange || "all");
     const [showSell, setShowSell] = useState(false);
 
     const requireAuth = () => {

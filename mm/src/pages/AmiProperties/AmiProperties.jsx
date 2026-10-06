@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { FaFilter, FaTimes, FaSlidersH } from "react-icons/fa";
+import { FaTimes, FaSlidersH } from "react-icons/fa";
 import AmiNavbar from "../../components/AmiNavbar";
 import AmiFooter from "../../components/AmiFooter";
 import SearchBar from "../../components/SearchBar";
@@ -15,37 +15,39 @@ const AmiProperties = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [showFilters, setShowFilters] = useState(false);
 
-    const [filters, setFilters] = useState({
-        type: searchParams.get("type") || "all",
-        status: searchParams.get("status") || "all",
+    const filters = {
+        type: TYPES.includes(searchParams.get("type")) ? searchParams.get("type") : "all",
+        status: STATUSES.includes(searchParams.get("status")) ? searchParams.get("status") : "all",
         location: searchParams.get("location") || "",
-    });
-
-    const { properties, loading, hasMore, loadMore } = useProperties(filters);
-
-    // Keep URL in sync with filters (one-way: filters → URL only)
-    useEffect(() => {
-        const params = {};
-        if (filters.type !== "all") params.type = filters.type;
-        if (filters.status !== "all") params.status = filters.status;
-        if (filters.location) params.location = filters.location;
-        setSearchParams(params, { replace: true });
-    }, [filters, setSearchParams]);
+        priceRange: searchParams.get("price") || "all",
+    };
+    const setFilters = (next) => {
+        const values = typeof next === "function" ? next(filters) : next;
+        const params = new URLSearchParams();
+        if (values.type !== "all") params.set("type", values.type);
+        if (values.status !== "all") params.set("status", values.status);
+        if (values.location) params.set("location", values.location);
+        if (values.priceRange && values.priceRange !== "all") params.set("price", values.priceRange);
+        setSearchParams(params);
+    };
+    const { properties, loading, error, hasMore, loadMore } = useProperties(filters);
 
     const handleSearch = (f) => {
         setFilters({
             type: f.type || "all",
             status: f.status || "all",
             location: f.location || "",
+            priceRange: f.priceRange || "all",
         });
     };
 
-    const clearFilters = () => setFilters({ type: "all", status: "all", location: "" });
+    const clearFilters = () => setFilters({ type: "all", status: "all", location: "", priceRange: "all" });
 
     const activeFilterCount = [
         filters.type !== "all",
         filters.status !== "all",
         !!filters.location,
+        filters.priceRange !== "all",
     ].filter(Boolean).length;
 
     return (
@@ -64,7 +66,7 @@ const AmiProperties = () => {
                         {filters.location ? `in ${filters.location}` : "Across Nigeria"}
                     </p>
                     <div className="ami-properties-page__search">
-                        <SearchBar onSearch={handleSearch} compact />
+                        <SearchBar key={searchParams.toString()} initialFilters={filters} onSearch={handleSearch} compact />
                     </div>
                 </div>
             </div>
@@ -76,6 +78,8 @@ const AmiProperties = () => {
                         <button
                             className={`ami-filter-bar__toggle ${showFilters ? "active" : ""}`}
                             onClick={() => setShowFilters(!showFilters)}
+                            aria-expanded={showFilters}
+                            aria-controls="property-filter-panel"
                         >
                             <FaSlidersH />
                             Filters
@@ -120,6 +124,15 @@ const AmiProperties = () => {
                     </div>
                 </div>
 
+                {showFilters && (
+                    <div id="property-filter-panel" className="ami-filter-panel">
+                        <label htmlFor="filter-location">Location</label>
+                        <input id="filter-location" value={filters.location} placeholder="City or neighbourhood"
+                            onChange={(e) => setFilters((f) => ({ ...f, location: e.target.value }))} />
+                        <p>Use the search bar above to choose a price range.</p>
+                    </div>
+                )}
+                {error && <p role="alert" className="ami-results-error">{error} <button onClick={loadMore}>Try again</button></p>}
                 {/* Results count */}
                 <div className="ami-properties-page__count">
                     {loading ? "Loading..." : `${properties.length} propert${properties.length !== 1 ? "ies" : "y"} found`}
@@ -134,7 +147,7 @@ const AmiProperties = () => {
                             : (
                                 <div className="ami-properties-page__empty">
                                     <span>🏠</span>
-                                    <p>No properties found</p>
+                                    <p>{error ? "Properties are temporarily unavailable" : "No properties match your filters"}</p>
                                     <button className="ami-btn-outline" onClick={clearFilters}>Clear filters</button>
                                 </div>
                             )}

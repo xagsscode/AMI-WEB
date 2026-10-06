@@ -7,7 +7,7 @@ import AmiNavbar from "../../components/AmiNavbar";
 import AmiFooter from "../../components/AmiFooter";
 import {
     FaBed, FaBath, FaMapMarkerAlt, FaArrowLeft,
-    FaWhatsapp, FaEnvelope, FaCheckCircle, FaSpinner,
+    FaEnvelope, FaCheckCircle, FaSpinner,
 } from "react-icons/fa";
 import { MdSquareFoot } from "react-icons/md";
 import "./PropertyDetail.css";
@@ -25,30 +25,39 @@ const PropertyDetail = () => {
     const [activeImg, setActiveImg] = useState(0);
     const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
     const [sent, setSent] = useState(false);
+    const [inquiryError, setInquiryError] = useState("");
     const { submit, submitting } = useSubmitInquiry();
 
     useEffect(() => {
+        let cancelled = false;
         const fetch = async () => {
+            setLoading(true);
+            setProperty(null);
+            setActiveImg(0);
             try {
                 const snap = await getDoc(doc(db, "properties", id));
-                if (snap.exists()) {
+                if (!cancelled && snap.exists()) {
                     setProperty({ id: snap.id, ...snap.data() });
                 }
             } catch (err) {
                 console.error(err);
             } finally {
-                setLoading(false);
+                if (!cancelled) setLoading(false);
             }
         };
         fetch();
+        return () => { cancelled = true; };
     }, [id]);
 
     const handleInquiry = async (e) => {
         e.preventDefault();
+        setInquiryError("");
         const result = await submit({ ...form, propertyId: id, propertyTitle: property?.title });
         if (result.success) {
             setSent(true);
             setForm({ name: "", email: "", phone: "", message: "" });
+        } else {
+            setInquiryError("Your inquiry could not be sent. Please try again or email info@amismarthomes.com.");
         }
     };
 
@@ -109,7 +118,8 @@ const PropertyDetail = () => {
                     {images.length > 1 && (
                         <div className="pd-gallery__thumbs">
                             {images.map((src, i) => (
-                                <img key={i} src={src} alt=""
+                                <img key={i} src={src} alt={`View photo ${i + 1} of ${title}`} role="button" tabIndex={0}
+                                    onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActiveImg(i); } }}
                                     className={`pd-gallery__thumb ${i === activeImg ? "active" : ""}`}
                                     onClick={() => setActiveImg(i)}
                                 />
@@ -159,15 +169,16 @@ const PropertyDetail = () => {
                             </div>
                         ) : (
                             <form onSubmit={handleInquiry} className="pd-inquiry__form">
-                                <input className="pd-input" placeholder="Your name *" required
+                                <input aria-label="Your name" autoComplete="name" className="pd-input" placeholder="Your name *" required
                                     value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} />
-                                <input className="pd-input" type="email" placeholder="Email address *" required
+                                <input aria-label="Email address" autoComplete="email" className="pd-input" type="email" placeholder="Email address *" required
                                     value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
-                                <input className="pd-input" placeholder="Phone number"
+                                <input aria-label="Phone number" type="tel" autoComplete="tel" className="pd-input" placeholder="Phone number"
                                     value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
-                                <textarea className="pd-textarea"
+                                <textarea aria-label="Your inquiry" className="pd-textarea"
                                     placeholder={`I'm interested in "${title}". Please contact me.`}
                                     value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} />
+                                {inquiryError && <p role="alert">{inquiryError}</p>}
                                 <button type="submit" className="pd-inquiry__btn" disabled={submitting}>
                                     {submitting ? <><FaSpinner className="spin" /> Sending...</> : <>
                                         <FaEnvelope /> Send Inquiry

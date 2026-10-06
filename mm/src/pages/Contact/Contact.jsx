@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock,
+  FaEnvelope, FaMapMarkerAlt, FaClock,
   FaPaperPlane, FaChevronDown, FaChevronUp,
 } from "react-icons/fa";
-import { FaXTwitter, FaInstagram, FaLinkedin, FaFacebook } from "react-icons/fa6";
 import { MdVerified } from "react-icons/md";
 import AmiNavbar from "../../components/AmiNavbar";
 import AmiFooter from "../../components/AmiFooter";
@@ -19,36 +18,13 @@ const CONTACT_METHODS = [
     href: "mailto:info@amismarthomes.com",
     color: "#C9A96E",
   },
-  {
-    icon: <FaPhone />,
-    title: "Call Us",
-    detail: "+234 800 000 0000",
-    note: "Mon – Fri, 9am – 6pm WAT",
-    href: "tel:+2348000000000",
-    color: "#10B981",
-  },
-  {
-    icon: <FaXTwitter />,
-    title: "Twitter / X",
-    detail: "@amismarthomes",
-    note: "Fast replies on DMs",
-    href: "https://x.com",
-    color: "#171717",
-  },
-  {
-    icon: <FaInstagram />,
-    title: "Instagram",
-    detail: "@amismarthomes",
-    note: "Daily property updates",
-    href: "https://instagram.com",
-    color: "#E1306C",
-  },
+
 ];
 
 const FAQS = [
   {
     q: "How do I list a property on AMI Smart Homes?",
-    a: "Sign up for an account, go to your dashboard, and click 'List Property'. Fill in the property details, upload photos, and submit for verification. Our team reviews listings within 24–48 hours.",
+    a: "Sign in and select Sell in the property search bar to submit your property details. Contact our team if you need help preparing your listing.",
   },
   {
     q: "Are all properties on AMI verified?",
@@ -56,7 +32,7 @@ const FAQS = [
   },
   {
     q: "How do I contact an agent about a property?",
-    a: "On any property listing page, click 'Contact Agent' or 'Call Agent'. You can also browse our Agents page to find and reach out to agents directly by phone or email.",
+    a: "Open a property listing and complete the inquiry form. You can also contact our team by email with the property name and your questions.",
   },
   {
     q: "Is there a fee to search or browse properties?",
@@ -64,11 +40,11 @@ const FAQS = [
   },
   {
     q: "How do I report a suspicious listing?",
-    a: "Click the 'Report' button on any listing page, or email us at info@amismarthomes.com. We take fraud seriously and investigate all reports promptly.",
+    a: "Email info@amismarthomes.com with the listing link and your concerns so our team can review it.",
   },
   {
     q: "Can I save properties and compare them?",
-    a: "Yes. Create a free account and use the heart icon on any property card to save it. You can view all saved properties in your dashboard.",
+    a: "Use the heart icon on a property card to save it in your current browser. Saved selections remain on this device; a comparison view is not currently available.",
   },
 ];
 
@@ -82,9 +58,9 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const body = `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\n\n${formData.message}`;
+    window.location.href = `mailto:info@amismarthomes.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(body)}`;
     setSubmitted(true);
-    setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-    setTimeout(() => setSubmitted(false), 5000);
   };
 
   return (
@@ -134,15 +110,15 @@ const Contact = () => {
             {/* Form */}
             <div className="ami-contact-form-wrap">
               <h2 className="ami-contact-form-wrap__title">Send Us a Message</h2>
-              <p className="ami-contact-form-wrap__sub">Fill in the form and we'll get back to you within 24 hours.</p>
+              <p className="ami-contact-form-wrap__sub">Fill in the form to prepare an email to our team.</p>
 
               {submitted && (
-                <div className="ami-contact-success">
-                  ✅ Message sent! We'll be in touch shortly.
+                <div className="ami-contact-success" role="status">
+                  Your email draft is ready. Send it from your email app to complete your inquiry.
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="ami-contact-form" noValidate>
+              <form onSubmit={handleSubmit} className="ami-contact-form">
                 <div className="ami-contact-form__row">
                   <div className="ami-contact-form__field">
                     <label htmlFor="c-name">Full Name *</label>
@@ -171,7 +147,7 @@ const Contact = () => {
                 </div>
 
                 <button type="submit" className="ami-btn-primary ami-contact-form__submit">
-                  <FaPaperPlane /> Send Message
+                  <FaPaperPlane /> Prepare Email
                 </button>
               </form>
             </div>
@@ -185,7 +161,7 @@ const Contact = () => {
                     <div className="ami-contact-info__item-icon"><FaMapMarkerAlt /></div>
                     <div>
                       <strong>AMI Smart Homes HQ</strong>
-                      <p>Plot 123, Wuse Zone 5<br />Abuja, FCT, Nigeria</p>
+                      <p>Abuja &amp; Kano, Nigeria</p>
                     </div>
                   </div>
                   <div className="ami-contact-info__item">
@@ -193,13 +169,6 @@ const Contact = () => {
                     <div>
                       <strong>Business Hours</strong>
                       <p>Mon – Fri: 9:00 AM – 6:00 PM WAT<br />Saturday: 10:00 AM – 2:00 PM WAT<br />Sunday: Closed</p>
-                    </div>
-                  </div>
-                  <div className="ami-contact-info__item">
-                    <div className="ami-contact-info__item-icon"><FaPhone /></div>
-                    <div>
-                      <strong>Phone</strong>
-                      <p>+234 800 000 0000</p>
                     </div>
                   </div>
                   <div className="ami-contact-info__item">
@@ -211,21 +180,13 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div className="ami-contact-info__socials">
-                  <p>Follow us</p>
-                  <div className="ami-contact-info__social-links">
-                    <a href="#" aria-label="Twitter" className="ami-contact-info__social"><FaXTwitter /></a>
-                    <a href="#" aria-label="Instagram" className="ami-contact-info__social"><FaInstagram /></a>
-                    <a href="#" aria-label="Facebook" className="ami-contact-info__social"><FaFacebook /></a>
-                    <a href="#" aria-label="LinkedIn" className="ami-contact-info__social"><FaLinkedin /></a>
-                  </div>
-                </div>
+
               </div>
 
               {/* CTA card */}
               <div className="ami-contact-cta-card">
                 <h4>Ready to find your property?</h4>
-                <p>Browse thousands of verified listings across Nigeria.</p>
+                <p>Explore our properties and find a home that fits your plans.</p>
                 <button className="ami-btn-primary" onClick={() => navigate("/properties")}>
                   Browse Properties
                 </button>

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
-import { FaXTwitter, FaInstagram, FaFacebook, FaLinkedin } from "react-icons/fa6";
+import { FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import amiLogo from "../../assets/Image/AMI.png";
 import "./AmiFooter.css";
 
@@ -20,12 +19,7 @@ const AmiFooter = () => {
                             Nigeria's trusted platform for buying, renting, and investing in verified properties.
                             Find your dream home with confidence.
                         </p>
-                        <div className="ami-footer__socials">
-                            <a href="#" aria-label="Twitter" className="ami-footer__social"><FaXTwitter /></a>
-                            <a href="#" aria-label="Instagram" className="ami-footer__social"><FaInstagram /></a>
-                            <a href="#" aria-label="Facebook" className="ami-footer__social"><FaFacebook /></a>
-                            <a href="#" aria-label="LinkedIn" className="ami-footer__social"><FaLinkedin /></a>
-                        </div>
+
                     </div>
 
                     {/* Quick Links */}
@@ -57,12 +51,9 @@ const AmiFooter = () => {
                         <ul className="ami-footer__contact">
                             <li>
                                 <FaMapMarkerAlt className="ami-footer__contact-icon" />
-                                <span>Plot 123, Wuse Zone 5, Abuja, Nigeria</span>
+                                <span>Abuja &amp; Kano, Nigeria</span>
                             </li>
-                            <li>
-                                <FaPhone className="ami-footer__contact-icon" />
-                                <a href="tel:+2348000000000">+234 800 000 0000</a>
-                            </li>
+
                             <li>
                                 <FaEnvelope className="ami-footer__contact-icon" />
                                 <a href="mailto:info@amismarthomes.com">info@amismarthomes.com</a>
@@ -74,9 +65,9 @@ const AmiFooter = () => {
                 <div className="ami-footer__bottom">
                     <p>© {year} AMI Smart Homes & Properties. All rights reserved.</p>
                     <div className="ami-footer__bottom-links">
-                        <Link to="">Privacy Policy</Link>
-                        <Link to="">Terms of Service</Link>
-                        <Link to="">Cookie Policy</Link>
+                        <Link to="/privacy-policy">Privacy Policy</Link>
+                        <Link to="/terms-of-service">Terms of Service</Link>
+                        <Link to="/cookie-policy">Cookie Policy</Link>
                     </div>
                 </div>
             </div>

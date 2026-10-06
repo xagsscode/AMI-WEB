@@ -2,7 +2,7 @@
 :root {
     --gold: #C9A96E;
     --gold-light: #E8D5B0;
-    --gold-dark: #A8843A;
+    --gold-dark: #806020;
     --gold-bg: #FBF7F0;
     --white: #FFFFFF;
     --off-white: #F9F8F6;
@@ -179,8 +179,8 @@
 
 /* ===== SCROLL ANIMATION ===== */
 .ami-fade-up {
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 1;
+    transform: translateY(0);
     transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
@@ -229,4 +229,23 @@
     background: var(--gold);
     border-radius: 2px;
     margin: 16px 0;
+}
+/* Readable controls, consistent spacing, and reduced-motion support. */
+.ami-page .ami-btn-primary { color: #171717; }
+.ami-page button:disabled { opacity: .65; cursor: wait; }
+.ami-page input, .ami-page textarea, .ami-page select { font: inherit; }
+.ami-section-subtitle { color: var(--gray-600); }
+.ami-filter-panel { padding: 24px; margin-bottom: 24px; border: 1px solid var(--gray-200); border-radius: var(--radius-md); background: var(--off-white); }
+.ami-filter-panel label { display: block; font-weight: 600; margin-bottom: 8px; }
+.ami-filter-panel input { width: 100%; max-width: 420px; padding: 12px; border: 1px solid var(--gray-300); border-radius: 8px; }
+.ami-filter-panel p { margin-top: 12px; color: var(--gray-600); }
+.ami-results-error { padding: 16px; background: #fff1f2; color: #9f1239; border-radius: 8px; margin-bottom: 20px; }
+.ami-results-error button { padding: 4px 12px; margin-left: 8px; cursor: pointer; }
+@media (max-width: 640px) {
+    .ami-container { padding-inline: 20px; }
+    .ami-section { padding-block: 56px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    .ami-fade-up { opacity: 1; transform: none; }
 }

@@ -150,3 +150,4 @@
 .ami-property-card--skeleton .ami-property-card__img {
     background: var(--gray-100);
 }
+.ami-property-card__title { font-size: 17px; line-height: 1.4; color: var(--gray-900); margin: 6px 0 10px; }

@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
-import { FaHome, FaUserCircle } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 import { useNewAuth } from "../../contexts/NewAuthContext";
 import amiLogo from "../../assets/Image/AMI.png";
 import "./AmiNavbar.css";
 
 const GUEST_LINKS = [
     { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
     { label: "Agents", href: "/agents" },
     { label: "Contact", href: "/contact" },
 ];
@@ -18,6 +19,7 @@ const AUTH_LINKS = [
     { label: "Buy", href: "/properties?status=sale" },
     { label: "Rent", href: "/properties?status=rent" },
     { label: "Properties", href: "/properties" },
+    { label: "About", href: "/about" },
     { label: "Agents", href: "/agents" },
     { label: "Contact", href: "/contact" },
 ];
@@ -38,8 +40,10 @@ const AmiNavbar = () => {
     }, []);
 
     useEffect(() => {
-        setMenuOpen(false);
-    }, [location.pathname]);
+        const onKeyDown = (event) => { if (event.key === "Escape") setMenuOpen(false); };
+        window.addEventListener("keydown", onKeyDown);
+        return () => window.removeEventListener("keydown", onKeyDown);
+    }, []);
 
     useEffect(() => {
         document.body.style.overflow = menuOpen ? "hidden" : "";
@@ -47,7 +51,7 @@ const AmiNavbar = () => {
     }, [menuOpen]);
 
     return (
-        <nav className={`ami-navbar ${scrolled ? "ami-navbar--scrolled" : ""}`}>
+        <nav aria-label="Main navigation" className={`ami-navbar ${scrolled || location.pathname !== "/" || menuOpen ? "ami-navbar--scrolled" : ""}`}>
             <div className="ami-container ami-navbar__inner">
                 {/* Logo */}
                 <Link to="/" className="ami-navbar__logo">
@@ -104,6 +108,7 @@ const AmiNavbar = () => {
                     onClick={() => setMenuOpen(!menuOpen)}
                     aria-label="Toggle menu"
                     aria-expanded={menuOpen}
+                    aria-controls="mobile-navigation"
                 >
                     {menuOpen ? <IoClose size={24} /> : <HiMenuAlt3 size={24} />}
                 </button>
@@ -111,7 +116,7 @@ const AmiNavbar = () => {
 
             {/* Mobile menu */}
             {menuOpen && (
-                <div className="ami-navbar__mobile-menu">
+                <div id="mobile-navigation" className="ami-navbar__mobile-menu">
                     {NAV_LINKS.map((link) => (
                         <Link
                             key={link.label}

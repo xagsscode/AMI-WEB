@@ -1,3 +1,4 @@
+import { matchesProperty } from "../utils/propertyFilters";
 import { useState, useEffect, useRef } from "react";
 import {
     collection,
@@ -17,107 +18,52 @@ const PAGE_SIZE = 9;
 export const useProperties = (filters = {}) => {
     const [properties, setProperties] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [lastDoc, setLastDoc] = useState(null);
-    const [hasMore, setHasMore] = useState(true);
-    const lastDocRef = useRef(null);
+    const [error, setError] = useState("");
+    const [hasMore, setHasMore] = useState(false);
+    const [page, setPage] = useState(0);
+    const cursor = useRef(null);
+    const generation = useRef(0);
+    const filterKey = JSON.stringify([filters.type, filters.status, filters.location, filters.priceRange]);
+    const previousKey = useRef(filterKey);
 
-    const buildQuery = (cursor = null) => {
-        const constraints = [];
-
-        if (filters.type && filters.type !== "all") {
-            constraints.push(where("type", "==", filters.type));
-        }
-        if (filters.status && filters.status !== "all") {
-            constraints.push(where("status", "==", filters.status));
-        }
-
-        constraints.push(orderBy("createdAt", "desc"));
-        constraints.push(limit(PAGE_SIZE));
-
-        if (cursor) {
-            constraints.push(startAfter(cursor));
-        }
-
-        return query(collection(db, "properties"), ...constraints);
-    };
-
-    // Reset and fetch fresh when filters change
     useEffect(() => {
+        const requestId = ++generation.current;
+        const changed = previousKey.current !== filterKey;
+        previousKey.current = filterKey;
+        if (changed) cursor.current = null;
         let cancelled = false;
-
-        const fetch = async () => {
+        const fetchPage = async () => {
             setLoading(true);
-            setProperties([]);
-            lastDocRef.current = null;
-
+            setError("");
+            if (changed) setProperties([]);
             try {
-                // Fetch all (up to PAGE_SIZE * 3 to account for client-side filtering)
-                const q = query(
-                    collection(db, "properties"),
-                    orderBy("createdAt", "desc"),
-                    limit(PAGE_SIZE * 5)
-                );
-                const snap = await getDocs(q);
-
-                if (cancelled) return;
-
-                let docs = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-
-                // Client-side filtering — reliable regardless of Firestore indexes
-                if (filters.type && filters.type !== "all") {
-                    docs = docs.filter((d) => d.type === filters.type);
-                }
-                if (filters.status && filters.status !== "all") {
-                    docs = docs.filter((d) => d.status === filters.status);
-                }
-                if (filters.location) {
-                    docs = docs.filter((d) =>
-                        d.location?.toLowerCase().includes(filters.location.toLowerCase())
-                    );
-                }
-
-                setProperties(docs);
-                setHasMore(false); // pagination handled by the large fetch above
+                const constraints = [orderBy("createdAt", "desc"), limit(PAGE_SIZE * 5)];
+                if (cursor.current) constraints.push(startAfter(cursor.current));
+                const snap = await getDocs(query(collection(db, "properties"), ...constraints));
+                if (cancelled || requestId !== generation.current) return;
+                const docs = snap.docs.map((d) => ({ ...d.data(), id: d.id })).filter((d) => matchesProperty(d, filters));
+                const append = !changed && !!cursor.current;
+                cursor.current = snap.docs.at(-1) || null;
+                setProperties((prev) => append ? [...prev, ...docs] : docs);
+                setHasMore(snap.docs.length === PAGE_SIZE * 5);
             } catch (err) {
-                console.error("Error fetching properties:", err);
+                if (!cancelled) {
+                    console.error("Error fetching properties:", err);
+                    setError("We couldn't load properties. Please try again.");
+                    setHasMore(false);
+                }
             } finally {
                 if (!cancelled) setLoading(false);
             }
         };
-
-        fetch();
+        fetchPage();
         return () => { cancelled = true; };
+        // Filter values are fully represented by filterKey.
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [filters.type, filters.status, filters.location]);
+    }, [filterKey, page]);
 
-    const loadMore = async () => {
-        if (loading || !hasMore || !lastDocRef.current) return;
-        setLoading(true);
-        try {
-            const q = buildQuery(lastDocRef.current);
-            const snap = await getDocs(q);
-            let docs = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-
-            if (filters.type && filters.type !== "all") {
-                docs = docs.filter((d) => d.type === filters.type);
-            }
-            if (filters.status && filters.status !== "all") {
-                docs = docs.filter((d) => d.status === filters.status);
-            }
-
-            setProperties((prev) => [...prev, ...docs]);
-            const lastSnap = snap.docs[snap.docs.length - 1] || null;
-            setLastDoc(lastSnap);
-            lastDocRef.current = lastSnap;
-            setHasMore(snap.docs.length === PAGE_SIZE);
-        } catch (err) {
-            console.error("Error loading more:", err);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    return { properties, loading, hasMore, loadMore };
+    const loadMore = () => { if (!loading) setPage((value) => value + 1); };
+    return { properties, loading, error, hasMore, loadMore };
 };
 
 export const useFeaturedProperties = (count = 6) => {

@@ -1,3 +1,4 @@
+import amiLogo from "../../assets/Image/AMI.png";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaCalendarAlt, FaShieldAlt } from "react-icons/fa";
@@ -30,24 +31,24 @@ const useScrollAnimation = () => {
 };
 
 const policyData = {
-  title: "Privacy Policy for Fashion Tally",
+  title: "Privacy Policy for AMI Smart Homes",
   lastUpdated: "23 January 2026",
   sections: [
     {
       title: "Introduction",
       content:
-        'Fashion Tally ("we", "our", "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, store, and protect your personal information when you use our website, mobile application, services, or interact with our advertisements.',
+        'AMI Smart Homes ("we", "our", "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, store, and protect your personal information when you use our website, mobile application, services, or interact with our advertisements.',
       list: [],
     },
     {
       title: "1. Information We Collect",
       content:
-        "We may collect the following information when you use Fashion Tally or submit a form:",
+        "We may collect the following information when you use AMI Smart Homes or submit a form:",
       list: [
         "Full name",
         "Email address",
         "Phone number",
-        "Business information (such as fashion brand name)",
+        "Property details included in your inquiries or listings",
         "Usage data related to how you interact with our platform",
       ],
     },
@@ -55,7 +56,7 @@ const policyData = {
       title: "2. How We Use Your Information",
       content: "We use the information we collect to:",
       list: [
-        "Provide and improve Fashion Tally's services",
+        "Provide and improve AMI Smart Homes's services",
         "Create and manage user accounts",
         "Communicate with you about demos, updates, and support",
         "Send relevant product information and educational content",
@@ -125,7 +126,7 @@ const policyData = {
     {
       title: "9. Third-Party Links",
       content:
-        "Fashion Tally may contain links to third-party websites. We are not responsible for the privacy practices of those websites.",
+        "AMI Smart Homes may contain links to third-party websites. We are not responsible for the privacy practices of those websites.",
       list: [],
     },
     {
@@ -139,8 +140,8 @@ const policyData = {
       content:
         "If you have any questions about this Privacy Policy or how we handle your data, please contact us at:",
       list: [
-        "Email: info@fashiontally.com",
-        "Website: https://fashiontally.com",
+        "Email: info@amismarthomes.com",
+        "Contact: info@amismarthomes.com",
       ],
     },
   ],
@@ -158,8 +159,8 @@ const PrivacyPolicy = () => {
         <div className="privacy_nav-container">
           <div className="privacy_nav-content">
             <div className="privacy_nav-logo">
-              <img src="/logo.png" alt="logo" className="privacy_logo-image" />
-              <span className="privacy_logo-textt">FashionTally</span>
+              <img src={amiLogo} alt="AMI Smart Homes" className="privacy_logo-image" />
+              <span className="privacy_logo-textt">AMI Smart Homes</span>
             </div>
             <div className="privacy_nav-links-desktop">
               <a href="/" className="privacy_nav-link">
