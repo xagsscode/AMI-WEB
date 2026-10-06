@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import { MdVerified, MdApartment, MdVilla } from "react-icons/md";
 import { BsBuildings } from "react-icons/bs";
+import HeroSlider from "../../components/HeroSlider/HeroSlider";
 import AmiNavbar from "../../components/AmiNavbar";
 import AmiFooter from "../../components/AmiFooter";
 import ceoImage from "../../assets/Image/Abdulmumin Musa Isa.webp";
@@ -171,38 +172,7 @@ const AmiHome = () => {
             <AmiNavbar />
 
             {/* ── HERO ── */}
-            <section className="ami-hero">
-                <div className="ami-hero__overlay" />
-                <div className="ami-container ami-hero__content">
-                    <div className="ami-badge ami-hero__badge">
-                        <FaCheckCircle /> Premium Real Estate Development · Abuja &amp; Kano
-                    </div>
-                    <h1 className="ami-hero__title">
-                        Creating Homes,<br />
-                        <span className="ami-gold-text">Building Wealth</span>
-                    </h1>
-                    <p className="ami-hero__subtitle">
-                        AMI Smart Homes &amp; Properties Ltd delivers premium residential estates,
-                        smart homes, and investment-grade developments across Nigeria's fastest-growing cities.
-                    </p>
-                    <div className="ami-hero__cta-row">
-                        <button className="ami-btn-primary ami-hero__cta-btn" onClick={() => navigate("/properties")}>
-                            Explore Our Projects <FaArrowRight />
-                        </button>
-                        <button className="ami-btn-ghost ami-hero__cta-btn" onClick={() => navigate("/contact")}>
-                            Schedule a Consultation
-                        </button>
-                    </div>
-                    <div className="ami-hero__stats">
-                        {STATS.map((s) => (
-                            <div key={s.label} className="ami-hero__stat">
-                                <span className="ami-hero__stat-value">{s.value}</span>
-                                <span className="ami-hero__stat-label">{s.label}</span>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <HeroSlider stats={STATS} />
 
             {/* ── ABOUT US ── */}
             <section className="ami-section ami-about" style={{ background: "var(--off-white)" }}>
