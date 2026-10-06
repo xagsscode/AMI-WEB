@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaSearch, FaMapMarkerAlt, FaHome, FaMoneyBillWave, FaLock } from "react-icons/fa";
-import SellPropertyModal from "../SellPropertyModal/SellPropertyModal";
-import { useNewAuth } from "../../contexts/NewAuthContext";
+import { FaSearch, FaMapMarkerAlt, FaHome, FaMoneyBillWave } from "react-icons/fa";
 import "./SearchBar.css";
 
 const PROPERTY_TYPES = [
@@ -24,26 +22,16 @@ const PRICE_RANGES = [
 
 const SearchBar = ({ onSearch, compact = false, initialFilters = {} }) => {
     const navigate = useNavigate();
-    const { user } = useNewAuth();
     const [mode, setMode] = useState(initialFilters.status === "rent" ? "rent" : "buy");
     const [location, setLocation] = useState(initialFilters.location || "");
     const [type, setType] = useState(initialFilters.type || "all");
     const [priceRange, setPriceRange] = useState(initialFilters.priceRange || "all");
-    const [showSell, setShowSell] = useState(false);
-
-    const requireAuth = () => {
-        if (!user) { navigate("/login"); return false; }
-        return true;
-    };
-
     const handleModeChange = (newMode) => {
-        if ((newMode === "sell" || newMode === "rent") && !requireAuth()) return;
+        if (newMode === "sell") { navigate("/contact"); return; }
         setMode(newMode);
-        if (newMode === "sell") setShowSell(true);
     };
 
     const handleSearch = () => {
-        if (!requireAuth()) return;
         const params = new URLSearchParams();
         if (location) params.set("location", location);
         if (type !== "all") params.set("type", type);
@@ -71,14 +59,12 @@ const SearchBar = ({ onSearch, compact = false, initialFilters = {} }) => {
                         className={`ami-searchbar__toggle-btn ${mode === "sell" ? "active" : ""}`}
                         onClick={() => handleModeChange("sell")}
                     >
-                        {!user && <FaLock style={{ fontSize: 10, marginRight: 4 }} />}
                         Sell
                     </button>
                     <button
                         className={`ami-searchbar__toggle-btn ${mode === "rent" ? "active" : ""}`}
                         onClick={() => handleModeChange("rent")}
                     >
-                        {!user && <FaLock style={{ fontSize: 10, marginRight: 4 }} />}
                         Rent
                     </button>
                 </div>
@@ -90,13 +76,11 @@ const SearchBar = ({ onSearch, compact = false, initialFilters = {} }) => {
                             <FaMapMarkerAlt className="ami-searchbar__field-icon" />
                             <input
                                 type="text"
-                                placeholder={user ? "Enter location (e.g. Abuja, Lagos)" : "Sign in to search properties..."}
+                                placeholder="Enter location (e.g. Abuja, Kano)"
                                 value={location}
                                 onChange={(e) => setLocation(e.target.value)}
                                 className="ami-searchbar__input"
                                 onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                                onFocus={() => !user && navigate("/login")}
-                                readOnly={!user}
                                 aria-label="Location"
                             />
                         </div>
@@ -107,7 +91,7 @@ const SearchBar = ({ onSearch, compact = false, initialFilters = {} }) => {
                             <FaHome className="ami-searchbar__field-icon" />
                             <select
                                 value={type}
-                                onChange={(e) => { if (!requireAuth()) return; setType(e.target.value); }}
+                                onChange={(e) => { setType(e.target.value); }}
                                 className="ami-searchbar__select"
                                 aria-label="Property type"
                             >
@@ -123,7 +107,7 @@ const SearchBar = ({ onSearch, compact = false, initialFilters = {} }) => {
                             <FaMoneyBillWave className="ami-searchbar__field-icon" />
                             <select
                                 value={priceRange}
-                                onChange={(e) => { if (!requireAuth()) return; setPriceRange(e.target.value); }}
+                                onChange={(e) => { setPriceRange(e.target.value); }}
                                 className="ami-searchbar__select"
                                 aria-label="Price range"
                             >
@@ -134,8 +118,8 @@ const SearchBar = ({ onSearch, compact = false, initialFilters = {} }) => {
                         </div>
 
                         <button className="ami-searchbar__btn" onClick={handleSearch} aria-label="Search properties">
-                            {!user ? <FaLock /> : <FaSearch />}
-                            <span>{user ? "Search" : "Sign In"}</span>
+                            <FaSearch />
+                            <span>Search</span>
                         </button>
                     </div>
                 )}
@@ -148,7 +132,7 @@ const SearchBar = ({ onSearch, compact = false, initialFilters = {} }) => {
                         </p>
                         <button
                             className="ami-searchbar__btn"
-                            onClick={() => setShowSell(true)}
+                            onClick={() => navigate("/contact")}
                             aria-label="List your property"
                         >
                             List Property
@@ -157,11 +141,7 @@ const SearchBar = ({ onSearch, compact = false, initialFilters = {} }) => {
                 )}
             </div>
 
-            {showSell && (
-                <SellPropertyModal
-                    onClose={() => { setShowSell(false); setMode("buy"); }}
-                />
-            )}
+
         </>
     );
 };

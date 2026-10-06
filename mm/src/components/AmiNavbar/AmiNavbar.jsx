@@ -1,20 +1,11 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
-import { FaUserCircle } from "react-icons/fa";
-import { useNewAuth } from "../../contexts/NewAuthContext";
 import amiLogo from "../../assets/Image/AMI.png";
 import "./AmiNavbar.css";
 
-const GUEST_LINKS = [
-    { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
-    { label: "Agents", href: "/agents" },
-    { label: "Contact", href: "/contact" },
-];
-
-const AUTH_LINKS = [
+const NAV_LINKS = [
     { label: "Home", href: "/" },
     { label: "Buy", href: "/properties?status=sale" },
     { label: "Rent", href: "/properties?status=rent" },
@@ -25,13 +16,10 @@ const AUTH_LINKS = [
 ];
 
 const AmiNavbar = () => {
-    const navigate = useNavigate();
     const location = useLocation();
-    const { user, signOut } = useNewAuth();
     const [menuOpen, setMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
-    const NAV_LINKS = user ? AUTH_LINKS : GUEST_LINKS;
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 40);
@@ -75,31 +63,8 @@ const AmiNavbar = () => {
                     ))}
                 </div>
 
-                {/* Desktop actions */}
                 <div className="ami-navbar__actions">
-                    {user ? (
-                        <>
-                            <button
-                                className="ami-btn-outline ami-navbar__btn-login"
-                                onClick={() => navigate("/")}
-                            >
-                                <FaUserCircle style={{ marginRight: 6 }} />
-                                {user.name || user.email?.split("@")[0]}
-                            </button>
-                            <button className="ami-btn-ghost ami-navbar__btn-signout" onClick={signOut}>
-                                Sign Out
-                            </button>
-                        </>
-                    ) : (
-                        <>
-                            <button className="ami-btn-outline ami-navbar__btn-login" onClick={() => navigate("/login")}>
-                                Login
-                            </button>
-                            <button className="ami-btn-primary" onClick={() => navigate("/signup")}>
-                                Get Started
-                            </button>
-                        </>
-                    )}
+                    <Link className="ami-btn-primary" to="/contact">Enquire Now</Link>
                 </div>
 
                 {/* Mobile toggle */}
@@ -128,19 +93,7 @@ const AmiNavbar = () => {
                         </Link>
                     ))}
                     <div className="ami-navbar__mobile-actions">
-                        {user ? (
-                            <>
-                                <button className="ami-btn-outline" onClick={() => navigate("/")}>
-                                    {user.name || user.email?.split("@")[0]}
-                                </button>
-                                <button className="ami-btn-ghost" onClick={signOut}>Sign Out</button>
-                            </>
-                        ) : (
-                            <>
-                                <button className="ami-btn-outline" onClick={() => navigate("/login")}>Login</button>
-                                <button className="ami-btn-primary" onClick={() => navigate("/signup")}>Get Started</button>
-                            </>
-                        )}
+                        <Link className="ami-btn-primary" to="/contact" onClick={() => setMenuOpen(false)}>Enquire Now</Link>
                     </div>
                 </div>
             )}

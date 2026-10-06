@@ -1,9 +1,7 @@
-import amiLogo from "../../assets/Image/AMI.png";
-import { useState, useEffect } from "react";
+import AmiNavbar from "../../components/AmiNavbar";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaCalendarAlt, FaCookie } from "react-icons/fa";
-import { HiMenuAlt3 } from "react-icons/hi";
-import { IoClose } from "react-icons/io5";
 import "./CookiePolicy.css";
 ;
 
@@ -49,7 +47,7 @@ const policyData = {
       content: "AMI Smart Homes uses cookies to:",
       list: [
         "Ensure the platform functions properly",
-        "Remember your login and preferences",
+        "Remember your browsing preferences",
         "Improve performance and speed",
         "Analyze usage patterns to improve features",
         "Enhance security and prevent fraud",
@@ -67,7 +65,7 @@ const policyData = {
     {
       title: "a. Essential Cookies",
       content:
-        "These cookies are required for the platform to function properly. Without them, core features such as login, session management, and security may not work. These cookies cannot be disabled.",
+        "These cookies are required for the platform to function properly. Without them, core features such as navigation and preferences may not work. These cookies cannot be disabled.",
     },
     {
       title: "b. Performance & Analytics Cookies",
@@ -154,121 +152,12 @@ const getCookieTypeBadge = (title) => {
 
 const CookiePolicy = () => {
   const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useScrollAnimation();
 
   return (
-    <div className="cookie_page">
-      <nav className="cookie_nav-bar">
-        <div className="cookie_nav-container">
-          <div className="cookie_nav-content">
-            <div className="cookie_nav-logo">
-              <img src={amiLogo} alt="AMI Smart Homes" className="cookie_logo-image" />
-              <span className="cookie_logo-textt">AMI Smart Homes</span>
-            </div>
-            <div className="cookie_nav-links-desktop">
-              <a href="/" className="cookie_nav-link">
-                Home
-              </a>
-              <a href="/#featurees" className="cookie_nav-link">
-                Features
-              </a>
-              <a href="/#pricing" className="cookie_nav-link">
-                Pricing
-              </a>
-              <a href="/about" className="cookie_nav-link">
-                About
-              </a>
-              <a href="/contact" className="cookie_nav-link">
-                Contact
-              </a>
-              <div className="cookie_nav-buttons">
-                <button
-                  className="cookie_btn-outline"
-                  onClick={() => navigate("/login")}
-                >
-                  Login
-                </button>
-                <button
-                  className="cookie_btn-primaryy"
-                  onClick={() => navigate("/signup")}
-                >
-                  Get Started
-                </button>
-              </div>
-            </div>
-            <div className="cookie_nav-mobile-toggle">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="cookie_menu-btn"
-              >
-                {isMenuOpen ? <IoClose size={24} /> : <HiMenuAlt3 size={24} />}
-              </button>
-            </div>
-          </div>
-        </div>
-        {isMenuOpen && (
-          <div
-            className="cookie_nav-mobile-menu"
-            style={{
-              animation: isMenuOpen
-                ? "slideDown 0.3s ease-out"
-                : "slideUp 0.3s ease-out",
-            }}
-          >
-            <a
-              href="/"
-              className="cookie_nav-mobile-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </a>
-            <a
-              href="/#featurees"
-              className="cookie_nav-mobile-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Features
-            </a>
-            <a
-              href="/#pricing"
-              className="cookie_nav-mobile-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Pricing
-            </a>
-            <a
-              href="/about"
-              className="cookie_nav-mobile-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              About
-            </a>
-            <a
-              href="/contact"
-              className="cookie_nav-mobile-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Contact
-            </a>
-            <div className="cookie_nav-mobile-buttons">
-              <button
-                className="cookie_btn-outline"
-                onClick={() => navigate("/login")}
-              >
-                Login
-              </button>
-              <button
-                className="cookie_btn-primaryy"
-                onClick={() => navigate("/signup")}
-              >
-                Get Started
-              </button>
-            </div>
-          </div>
-        )}
-      </nav>
+    <div className="ami-page cookie_page" style={{ paddingTop: 96 }}>
+      <AmiNavbar />
 
       <div className="cookie_container">
         {/* Header */}

@@ -1,9 +1,7 @@
-import amiLogo from "../../assets/Image/AMI.png";
-import { useState, useEffect } from "react";
+import AmiNavbar from "../../components/AmiNavbar";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaCalendarAlt, FaFileAlt } from "react-icons/fa";
-import { HiMenuAlt3 } from "react-icons/hi";
-import { IoClose } from "react-icons/io5";
 import "./TermsOfService.css";
 ;
 
@@ -54,9 +52,9 @@ const policyData = {
       ],
     },
     {
-      title: "3. Account Registration & Responsibility",
+      title: "3. Property Inquiries",
       content:
-        "You are responsible for maintaining the confidentiality of your login details. All activities under your account are your responsibility. AMI Smart Homes is not liable for losses caused by unauthorized access due to your negligence. You agree to provide accurate and up-to-date information at all times.",
+        "Browsing the website does not require an account. Please provide accurate contact information when making a property inquiry so our team can respond.",
     },
     {
       title: "4. Subscription, Payments & Billing",
@@ -185,121 +183,12 @@ const policyData = {
 
 const TermsOfService = () => {
   const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useScrollAnimation();
 
   return (
-    <div className="terms_page">
-      <nav className="terms_nav-bar">
-        <div className="terms_nav-container">
-          <div className="terms_nav-content">
-            <div className="terms_nav-logo">
-              <img src={amiLogo} alt="AMI Smart Homes" className="terms_logo-image" />
-              <span className="terms_logo-textt">AMI Smart Homes</span>
-            </div>
-            <div className="terms_nav-links-desktop">
-              <a href="/" className="terms_nav-link">
-                Home
-              </a>
-              <a href="/#featurees" className="terms_nav-link">
-                Features
-              </a>
-              <a href="/#pricing" className="terms_nav-link">
-                Pricing
-              </a>
-              <a href="/about" className="terms_nav-link">
-                About
-              </a>
-              <a href="/contact" className="terms_nav-link">
-                Contact
-              </a>
-              <div className="terms_nav-buttons">
-                <button
-                  className="terms_btn-outline"
-                  onClick={() => navigate("/login")}
-                >
-                  Login
-                </button>
-                <button
-                  className="terms_btn-primaryy"
-                  onClick={() => navigate("/signup")}
-                >
-                  Get Started
-                </button>
-              </div>
-            </div>
-            <div className="terms_nav-mobile-toggle">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="terms_menu-btn"
-              >
-                {isMenuOpen ? <IoClose size={24} /> : <HiMenuAlt3 size={24} />}
-              </button>
-            </div>
-          </div>
-        </div>
-        {isMenuOpen && (
-          <div
-            className="terms_nav-mobile-menu"
-            style={{
-              animation: isMenuOpen
-                ? "slideDown 0.3s ease-out"
-                : "slideUp 0.3s ease-out",
-            }}
-          >
-            <a
-              href="/"
-              className="terms_nav-mobile-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </a>
-            <a
-              href="/#featurees"
-              className="terms_nav-mobile-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Features
-            </a>
-            <a
-              href="/#pricing"
-              className="terms_nav-mobile-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Pricing
-            </a>
-            <a
-              href="/about"
-              className="terms_nav-mobile-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              About
-            </a>
-            <a
-              href="/contact"
-              className="terms_nav-mobile-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Contact
-            </a>
-            <div className="terms_nav-mobile-buttons">
-              <button
-                className="terms_btn-outline"
-                onClick={() => navigate("/login")}
-              >
-                Login
-              </button>
-              <button
-                className="terms_btn-primaryy"
-                onClick={() => navigate("/signup")}
-              >
-                Get Started
-              </button>
-            </div>
-          </div>
-        )}
-      </nav>
+    <div className="ami-page terms_page" style={{ paddingTop: 96 }}>
+      <AmiNavbar />
 
       <div className="terms_container">
         {/* Header */}

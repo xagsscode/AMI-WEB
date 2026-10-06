@@ -1,3 +1,4 @@
+import { PUBLIC_PROPERTIES } from "../data/developments";
 import { matchesProperty } from "../utils/propertyFilters";
 import { useState, useEffect, useRef } from "react";
 import {
@@ -8,8 +9,6 @@ import {
     limit,
     startAfter,
     getDocs,
-    addDoc,
-    serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../backend/firebase.config";
 
@@ -37,6 +36,11 @@ export const useProperties = (filters = {}) => {
             setError("");
             if (changed) setProperties([]);
             try {
+                if (!db) {
+                    setProperties(PUBLIC_PROPERTIES.filter((property) => matchesProperty(property, filters)));
+                    setHasMore(false);
+                    return;
+                }
                 const constraints = [orderBy("createdAt", "desc"), limit(PAGE_SIZE * 5)];
                 if (cursor.current) constraints.push(startAfter(cursor.current));
                 const snap = await getDocs(query(collection(db, "properties"), ...constraints));
@@ -49,7 +53,8 @@ export const useProperties = (filters = {}) => {
             } catch (err) {
                 if (!cancelled) {
                     console.error("Error fetching properties:", err);
-                    setError("We couldn't load properties. Please try again.");
+                    setProperties(PUBLIC_PROPERTIES.filter((property) => matchesProperty(property, filters)));
+                    setError("Live listings are unavailable. Browse our developments below or contact our team for current availability.");
                     setHasMore(false);
                 }
             } finally {
@@ -105,24 +110,11 @@ export const useFeaturedProperties = (count = 6) => {
 };
 
 export const useSubmitInquiry = () => {
-    const [submitting, setSubmitting] = useState(false);
-
     const submit = async (data) => {
-        setSubmitting(true);
-        try {
-            await addDoc(collection(db, "inquiries"), {
-                ...data,
-                createdAt: serverTimestamp(),
-                status: "new",
-            });
-            return { success: true };
-        } catch (err) {
-            console.error("Inquiry error:", err);
-            return { success: false, error: err.message };
-        } finally {
-            setSubmitting(false);
-        }
+        const subject = `Property inquiry: ${data.propertyTitle || "AMI Smart Homes"}`;
+        const body = `Name: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone || ""}\n\n${data.message || "Please send me details about this property."}\n\nProperty: ${window.location.href}`;
+        window.location.href = `mailto:info@amismarthomes.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        return { success: true };
     };
-
-    return { submit, submitting };
+    return { submit, submitting: false };
 };

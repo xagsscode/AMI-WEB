@@ -1,3 +1,4 @@
+import { PUBLIC_PROPERTIES } from "../../data/developments";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
@@ -35,6 +36,9 @@ const PropertyDetail = () => {
             setProperty(null);
             setActiveImg(0);
             try {
+                const development = PUBLIC_PROPERTIES.find((item) => item.id === id);
+                if (development) { setProperty(development); return; }
+                if (!db) return;
                 const snap = await getDoc(doc(db, "properties", id));
                 if (!cancelled && snap.exists()) {
                     setProperty({ id: snap.id, ...snap.data() });
@@ -165,7 +169,7 @@ const PropertyDetail = () => {
                         {sent ? (
                             <div className="pd-inquiry__success">
                                 <FaCheckCircle />
-                                <p>Your inquiry has been sent. We'll be in touch shortly.</p>
+                                <p>Your email draft is ready. Send it from your email app to complete your inquiry.</p>
                             </div>
                         ) : (
                             <form onSubmit={handleInquiry} className="pd-inquiry__form">
@@ -181,7 +185,7 @@ const PropertyDetail = () => {
                                 {inquiryError && <p role="alert">{inquiryError}</p>}
                                 <button type="submit" className="pd-inquiry__btn" disabled={submitting}>
                                     {submitting ? <><FaSpinner className="spin" /> Sending...</> : <>
-                                        <FaEnvelope /> Send Inquiry
+                                        <FaEnvelope /> Prepare Inquiry Email
                                     </>}
                                 </button>
                             </form>

@@ -1,9 +1,7 @@
-import amiLogo from "../../assets/Image/AMI.png";
-import { useState, useEffect } from "react";
+import AmiNavbar from "../../components/AmiNavbar";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaCalendarAlt, FaShieldAlt } from "react-icons/fa";
-import { HiMenuAlt3 } from "react-icons/hi";
-import { IoClose } from "react-icons/io5";
 import "./PrivacyPolicy.css";
 ;
 
@@ -67,7 +65,7 @@ const policyData = {
       title: "3. Legal Basis for Processing",
       content: "We collect and process your information based on:",
       list: [
-        "Your consent (when you submit forms or sign up)",
+        "Your consent (when you submit forms)",
         "Our legitimate business interests",
         "Legal and regulatory obligations",
       ],
@@ -149,121 +147,12 @@ const policyData = {
 
 const PrivacyPolicy = () => {
   const navigate = useNavigate();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useScrollAnimation();
 
   return (
-    <div className="privacy_page">
-      <nav className="privacy_nav-bar">
-        <div className="privacy_nav-container">
-          <div className="privacy_nav-content">
-            <div className="privacy_nav-logo">
-              <img src={amiLogo} alt="AMI Smart Homes" className="privacy_logo-image" />
-              <span className="privacy_logo-textt">AMI Smart Homes</span>
-            </div>
-            <div className="privacy_nav-links-desktop">
-              <a href="/" className="privacy_nav-link">
-                Home
-              </a>
-              <a href="/#featurees" className="privacy_nav-link">
-                Features
-              </a>
-              <a href="/#pricing" className="privacy_nav-link">
-                Pricing
-              </a>
-              <a href="/about" className="privacy_nav-link">
-                About
-              </a>
-              <a href="/contact" className="privacy_nav-link">
-                Contact
-              </a>
-              <div className="privacy_nav-buttons">
-                <button
-                  className="privacy_btn-outline"
-                  onClick={() => navigate("/login")}
-                >
-                  Login
-                </button>
-                <button
-                  className="privacy_btn-primaryy"
-                  onClick={() => navigate("/signup")}
-                >
-                  Get Started
-                </button>
-              </div>
-            </div>
-            <div className="privacy_nav-mobile-toggle">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="privacy_menu-btn"
-              >
-                {isMenuOpen ? <IoClose size={24} /> : <HiMenuAlt3 size={24} />}
-              </button>
-            </div>
-          </div>
-        </div>
-        {isMenuOpen && (
-          <div
-            className="privacy_nav-mobile-menu"
-            style={{
-              animation: isMenuOpen
-                ? "slideDown 0.3s ease-out"
-                : "slideUp 0.3s ease-out",
-            }}
-          >
-            <a
-              href="/"
-              className="privacy_nav-mobile-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </a>
-            <a
-              href="/#featurees"
-              className="privacy_nav-mobile-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Features
-            </a>
-            <a
-              href="/#pricing"
-              className="privacy_nav-mobile-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Pricing
-            </a>
-            <a
-              href="/about"
-              className="privacy_nav-mobile-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              About
-            </a>
-            <a
-              href="/contact"
-              className="privacy_nav-mobile-link"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Contact
-            </a>
-            <div className="privacy_nav-mobile-buttons">
-              <button
-                className="privacy_btn-outline"
-                onClick={() => navigate("/login")}
-              >
-                Login
-              </button>
-              <button
-                className="privacy_btn-primaryy"
-                onClick={() => navigate("/signup")}
-              >
-                Get Started
-              </button>
-            </div>
-          </div>
-        )}
-      </nav>
+    <div className="ami-page privacy_page" style={{ paddingTop: 96 }}>
+      <AmiNavbar />
 
       <div className="privacy_container">
         {/* Header */}

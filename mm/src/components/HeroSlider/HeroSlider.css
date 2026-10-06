@@ -16,3 +16,6 @@
     .ami-hero-slider__controls { gap: 8px; }
     .ami-hero-slider .ami-hero__content { padding-bottom: 40px; }
 }
+
+/* Fill the first screen; allow content to grow on smaller displays. */
+.ami-home .ami-hero-slider { min-height: 100vh; min-height: 100dvh; }

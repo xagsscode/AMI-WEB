@@ -24,7 +24,7 @@ const CONTACT_METHODS = [
 const FAQS = [
   {
     q: "How do I list a property on AMI Smart Homes?",
-    a: "Sign in and select Sell in the property search bar to submit your property details. Contact our team if you need help preparing your listing.",
+    a: "Select Sell in the property search bar or contact our team to discuss your property and the information needed for a listing.",
   },
   {
     q: "Are all properties on AMI verified?",
@@ -32,7 +32,7 @@ const FAQS = [
   },
   {
     q: "How do I contact an agent about a property?",
-    a: "Open a property listing and complete the inquiry form. You can also contact our team by email with the property name and your questions.",
+    a: "Open a property listing and prepare an inquiry email using the form. Send the draft from your email app, or contact our team directly with the property name and your questions.",
   },
   {
     q: "Is there a fee to search or browse properties?",
@@ -78,7 +78,7 @@ const Contact = () => {
             <span className="ami-gold-text">Find Your Property</span>
           </h1>
           <p className="ami-contact-hero__sub">
-            Have a question about a listing, need help with your account, or want to list a property?
+            Have a question about a development, want to arrange a site visit, or discuss a property?
             Our team is ready to assist.
           </p>
         </div>
